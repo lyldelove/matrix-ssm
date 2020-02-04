@@ -15,15 +15,81 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <spring-version>5.2.3.RELEASE</spring-version>
+    <mybatis-version>3.5.3</mybatis-version>
+    <mybatis-spring-version>2.0.3</mybatis-spring-version>
+    <druid-version>1.1.16</druid-version>
+    <mysql-version>8.0.16</mysql-version>
+    <junit-version>4.11</junit-version>
+    <servlet-version>3.1.0</servlet-version>
   </properties>
 
   <dependencies>
+
+    <!--  Spring Web与远程调用-webmvc  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <!--  Spring 数据访问与集成-jdbc  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <!--  Spring 面向切面编程-aspects  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <!--  MyBatis  -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis-version}</version>
+    </dependency>
+
+    <!--  MyBatis整合Spring的适配包  -->
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${mybatis-spring-version}</version>
+    </dependency>
+
+    <!--  数据库连接池 Druid  -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid-version}</version>
+    </dependency>
+
+    <!--  MySQL数据库驱动 Druid  -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-version}</version>
+    </dependency>
+
+    <!--  Servlet API  -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet-version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+      <!--  单元测试 JUnit  -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>${junit-version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
