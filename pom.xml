@@ -19,6 +19,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring-version>5.2.3.RELEASE</spring-version>
     <mybatis-version>3.5.3</mybatis-version>
+    <mybatis-generator-version>1.4.0</mybatis-generator-version>
     <mybatis-spring-version>2.0.3</mybatis-spring-version>
     <druid-version>1.1.16</druid-version>
     <mysql-version>8.0.16</mysql-version>
@@ -55,6 +56,14 @@
       <artifactId>mybatis</artifactId>
       <version>${mybatis-version}</version>
     </dependency>
+
+    <!-- MyBatis Generator -->
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>${mybatis-generator-version}</version>
+    </dependency>
+
 
     <!--  MyBatis整合Spring的适配包  -->
     <dependency>
