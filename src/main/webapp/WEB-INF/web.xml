@@ -4,10 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--项目的欢迎页，项目运行起来后访问的页面-->
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+
 
     <!-- 1、注册ServletContext监听器，创建容器对象，并且将ApplicationContext对象放到Application域中，并指定spring核心配置文件 -->
     <listener>
@@ -64,4 +61,9 @@
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!--项目的欢迎页，项目运行起来后访问的页面-->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

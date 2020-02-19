@@ -19,6 +19,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <servlet-version>3.1.0</servlet-version>
     <spring-version>5.2.2.RELEASE</spring-version>
+    <thymeleaf-version>3.0.11.RELEASE</thymeleaf-version>
   </properties>
 
   <dependencies>
@@ -30,11 +31,25 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Spring Web Mvc -->
+    <!--  Spring Web Mvc  -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring-version}</version>
+    </dependency>
+
+    <!--  thymeleaf  -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>${thymeleaf-version}</version>
+    </dependency>
+
+    <!--  spring整合thymeleaf  -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>${thymeleaf-version}</version>
     </dependency>
 
 
