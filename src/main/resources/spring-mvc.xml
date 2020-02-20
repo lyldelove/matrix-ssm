@@ -16,20 +16,25 @@
     <!--  配置默认的静态资源处理器  -->
     <mvc:default-servlet-handler/>
 
-    <!--  配置thymeleaf视图解析器  -->
+    <!--  配置thymeleaf模板解析器  -->
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEN-INF/templates"/>
-        <property name="suffix" value=".html"/>
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
         <!--  应用于模板的模板模式，默认值为html  -->
         <property name="templateMode" value="HTML" />
         <!--  启用模板缓存，默认为true，设置成false可以在修改时自动更新  -->
-        <property name="cacheable" value="true" />
+        <property name="cacheable" value="false" />
     </bean>
 
     <!--  配置thymeleaf引擎  -->
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
         <property name="enableSpringELCompiler" value="true"/>
+    </bean>
+
+    <!--  配置thymeleaf视图解析器  -->
+    <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
     </bean>
 
 
