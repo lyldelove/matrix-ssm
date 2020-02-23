@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--  加载外部配置文件  -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
+    <!--  配置Druid数据源  -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!--  指定连接池中最大的活跃连接数  -->
+        <property name="maxActive" value="20"/>
+        <!--  指定启动连接池时，初始建立的连接数量  -->
+        <property name="initialSize" value="1"/>
+        <!--  指定连接池等待连接返回的最大等待时间，毫秒单位.  -->
+        <property name="maxWait" value="60000"/>
+        <!--  指定必须保持连接的最小值(For DBCP and Tomcat connection pools)  -->
+        <property name="minIdle" value="1"/>
+    </bean>
+
+    <!--  配置MyBatis  -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+    </bean>
 </beans>
