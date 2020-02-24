@@ -4,6 +4,11 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--  设置包扫描，不扫描Controller  -->
+    <context:component-scan base-package="com.lyldelove">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
     <!--  加载外部配置文件  -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -26,6 +31,15 @@
     <!--  配置MyBatis  -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--  指定MyBatis 的 XML 配置文件路径  -->
         <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!--  指定映射器 XML 文件路径  -->
+        <property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
     </bean>
+
+    <!--  扫描MyBatis映射器  -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lyldelove.dao"/>
+    </bean>
+
 </beans>
