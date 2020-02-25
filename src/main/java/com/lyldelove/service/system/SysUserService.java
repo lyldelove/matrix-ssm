@@ -1,6 +1,8 @@
 package com.lyldelove.service.system;
 
+import com.lyldelove.entity.system.SysUser;
+
 public interface SysUserService {
 
-    void test();
+    SysUser getUser();
 }

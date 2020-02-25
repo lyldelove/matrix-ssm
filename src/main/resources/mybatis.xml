@@ -4,8 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <typeAliases>
-
-    </typeAliases>
+    <settings>
+        <!--  其余骆驼命名法则，是的数据库字段可以对应JavaBean属性  -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
 
 </configuration>
