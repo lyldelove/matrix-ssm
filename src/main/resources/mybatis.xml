@@ -9,4 +9,9 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
+    <!--  起别名，这样在Mapper.xml文件中，resultType就可以简写，默认规则是JavaBean类名首字母小写  -->
+    <typeAliases>
+        <package name="com.lyldelove.entity.system"/>
+    </typeAliases>
+
 </configuration>

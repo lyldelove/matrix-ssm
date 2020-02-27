@@ -1,6 +1,5 @@
 package com.lyldelove.controller.system;
 
-import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.system.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,16 +17,9 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        System.out.println(1);
-        SysUser sysUser = sysUserService.getUser();
-        System.out.println(sysUser.getUserName());
-        return "login";
-    }
 }
