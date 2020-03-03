@@ -12,12 +12,7 @@ public class LoginController {
     @Autowired
     SysUserService sysUserService;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login() {
         return "login";
     }

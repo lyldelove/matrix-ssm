@@ -25,6 +25,7 @@
     <mybatis.spring.version>2.0.3</mybatis.spring.version>
     <mysql.version>8.0.16</mysql.version>
     <slf4j.version>1.7.25</slf4j.version>
+    <hibernate.validator>6.1.0.Final</hibernate.validator>
   </properties>
 
   <dependencies>
@@ -98,6 +99,14 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+
+    <!-- JSR 303 Java校验API实现 -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate.validator}</version>
+    </dependency>
+
 
   </dependencies>
 
