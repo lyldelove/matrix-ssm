@@ -24,6 +24,7 @@
         <property name="templateMode" value="HTML" />
         <!--  启用模板缓存，默认为true，设置成false可以在修改时自动更新  -->
         <property name="cacheable" value="false" />
+        <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
     <!--  配置thymeleaf引擎  -->
@@ -35,6 +36,7 @@
     <!--  配置thymeleaf视图解析器  -->
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="utf-8"/>
     </bean>
 
 
