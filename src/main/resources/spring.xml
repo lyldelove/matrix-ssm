@@ -42,4 +42,19 @@
         <property name="basePackage" value="com.lyldelove.dao"/>
     </bean>
 
+    <!--  注册Shiro Relam  -->
+    <bean id="userRelam" class="com.lyldelove.base.shiro.UserRealm">
+
+    </bean>
+
+    <!--  配置Shiro SecurityManager  -->
+    <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
+        <property name="realm" ref="userRelam"/>
+    </bean>
+
+    <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一直  -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
 </beans>
