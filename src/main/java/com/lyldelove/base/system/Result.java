@@ -1,6 +1,6 @@
 package com.lyldelove.base.system;
 
-import com.lyldelove.base.util.other.StringUtils;
+import com.lyldelove.base.util.string.StringUtils;
 import java.util.HashMap;
 
 public class Result extends HashMap<String, Object> {

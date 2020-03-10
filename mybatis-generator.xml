@@ -20,23 +20,32 @@
         </javaTypeResolver>
 
         <!--  指定javaBean(entity)生成的位置  -->
-        <javaModelGenerator targetPackage="com.lyldelove.entity" targetProject=".\src\main\java">
+        <javaModelGenerator targetPackage="com.lyldelove.entity.system" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="false" />
         </javaModelGenerator>
 
         <!--  指定sql映射文件生成的位置  -->
-        <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+        <sqlMapGenerator targetPackage="mapper.system"  targetProject=".\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!--  指定dao接口生成的位置，mapper接口  -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lyldelove.dao"  targetProject=".\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lyldelove.dao.system"  targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!--  指定表的生成策略  -->
-        <table tableName="t_test" domainObjectName="Test"/>
+        <table tableName="sys_user"
+               domainObjectName="SysUser"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableDeleteByPrimaryKey="true"
+               enableInsert="true"
+               enableSelectByExample="false"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByExample="false"
+               enableUpdateByPrimaryKey="true"/>
 
     </context>
 </generatorConfiguration>

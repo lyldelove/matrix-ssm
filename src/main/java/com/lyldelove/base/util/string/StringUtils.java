@@ -1,4 +1,4 @@
-package com.lyldelove.base.util.other;
+package com.lyldelove.base.util.string;
 
 
 /**

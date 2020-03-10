@@ -13,7 +13,7 @@ public class LoginController {
     }
     */
     public Result login() {
-        Result.
+        //Result.
         return null;
     }
 

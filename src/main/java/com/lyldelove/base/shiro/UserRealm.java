@@ -1,6 +1,6 @@
 package com.lyldelove.base.shiro;
 
-import com.lyldelove.base.util.other.StringUtils;
+import com.lyldelove.base.util.string.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
