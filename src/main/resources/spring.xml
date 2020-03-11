@@ -10,7 +10,7 @@
     </context:component-scan>
 
     <!--  加载外部配置文件  -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties, classpath:shiro.properties"/>
 
     <!--  配置Druid数据源  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -52,9 +52,19 @@
         <property name="realm" ref="userRelam"/>
     </bean>
 
+    <!--  验证码校验过滤器  -->
+    <bean id="captchaValidateFilter" class="com.lyldelove.base.filter.CaptchaValidateFilter">
+
+    </bean>
+
     <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一直  -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
+        <property name="filters">
+            <map>
+                <entry key="captchaValidate" value-ref="captchaValidateFilter"/>
+            </map>
+        </property>
     </bean>
 
 </beans>

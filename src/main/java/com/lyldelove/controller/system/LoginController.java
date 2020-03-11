@@ -12,7 +12,7 @@ public class LoginController {
         return "login";
     }
     */
-    public Result login() {
+    public Result login(String username, String password, Boolean rememberMe) {
         //Result.
         return null;
     }
