@@ -48,23 +48,31 @@
     </bean>
 
     <!--  配置Shiro SecurityManager  -->
-    <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRelam"/>
     </bean>
 
-    <!--  验证码校验过滤器  -->
-    <bean id="captchaValidateFilter" class="com.lyldelove.base.filter.CaptchaValidateFilter">
-
-    </bean>
-
-    <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一直  -->
+    <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一致  -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
+        <!--  配置过滤器  -->
         <property name="filters">
             <map>
                 <entry key="captchaValidate" value-ref="captchaValidateFilter"/>
             </map>
         </property>
+        <!--  配置权限  -->
+        <property name="filterChainDefinitionMap">
+            <map>
+                <entry key="/login" value="anon,captchaValidate"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--  验证码校验过滤器  -->
+    <bean id="captchaValidateFilter" class="com.lyldelove.base.filter.CaptchaValidateFilter">
+        <property name="captchaEnabled" value="${shiro.user.captchaEnabled}"/>
+        <property name="captchaType" value="${shiro.user.captchaType}"/>
     </bean>
 
 </beans>
