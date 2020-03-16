@@ -18,7 +18,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <servlet.version>3.1.0</servlet.version>
-    <spring.version>5.2.2.RELEASE</spring.version>
+    <spring.version>5.2.4.RELEASE</spring.version>
     <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
     <druid.version>1.1.16</druid.version>
     <mybatis.version>3.5.3</mybatis.version>
