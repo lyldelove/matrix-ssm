@@ -1,5 +1,9 @@
 package com.lyldelove.base.filter;
 
+import com.google.code.kaptcha.Constants;
+import com.lyldelove.base.util.shiro.ShiroUtils;
+import com.lyldelove.base.util.string.StringUtils;
+import com.lyldelove.common.constant.ShiroConstant;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
@@ -31,24 +35,26 @@ public class CaptchaValidateFilter extends AccessControlFilter {
 
     /**
      * 处理真正的拦截逻辑
-     * @param request 请求
-     * @param response 响应
-     * @param mappedValue
-     * @return
-     * @throws Exception
+     * @param servletRequest 请求
+     * @param servletResponse 响应
+     * @param mappedValue [urls]配置中拦截器参数部分
+     * @return true 继续处理, false 直接返回
+     * @throws Exception 异常
      */
     @Override
-    public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        return super.onPreHandle(request, response, mappedValue);
+    public boolean onPreHandle(ServletRequest servletRequest, ServletResponse servletResponse, Object mappedValue) throws Exception {
+        servletRequest.setAttribute(ShiroConstant.CURRENT_ENABLED, captchaEnabled);
+        servletRequest.setAttribute(ShiroConstant.CURRENT_TYPE, captchaType);
+        return super.onPreHandle(servletRequest, servletResponse, mappedValue);
     }
 
     /**
      * 是否通过验证
      * @param servletRequest 请求
      * @param servletResponse 响应
-     * @param o
-     * @return true 通过验证，false 没有通过验证
-     * @throws Exception
+     * @param mappedValue [urls]配置中拦截器参数部分
+     * @return 表示是否允许访问, 如果允许访问返回 true，否则 false
+     * @throws Exception 异常
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object mappedValue) throws Exception {
@@ -57,8 +63,17 @@ public class CaptchaValidateFilter extends AccessControlFilter {
         if (!captchaEnabled || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
             return true;
         }
+        //获取输入的验证码
+        String validateCode = httpServletRequest.getParameter(ShiroConstant.CURRENT_VALIDATECODE);
+        //获取KAPTCHA生成的key
+        Object object = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String code = StringUtils.isNull(object) ? "" : object.toString();
 
-        String validateCode = httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE);
+        //进行比较校验
+        if (StringUtils.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
+        {
+            return false;
+        }
 
         return false;
     }
@@ -67,11 +82,12 @@ public class CaptchaValidateFilter extends AccessControlFilter {
      * 没有通过验证时的操作
      * @param servletRequest 请求
      * @param servletResponse 响应
-     * @return
-     * @throws Exception
+     * @return 表示当访问拒绝时是否已经处理了；如果返回true表示需要继续处理；如果返回false表示该拦截器实例已经处理了，将直接返回即可
+     * @throws Exception 异常
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
-        return false;
+        servletRequest.setAttribute(ShiroConstant.CURRENT_CAPTCHA, ShiroConstant.CAPTCHA_ERROR);
+        return true;
     }
 }

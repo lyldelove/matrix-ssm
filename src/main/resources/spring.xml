@@ -64,7 +64,9 @@
         <!--  配置权限  -->
         <property name="filterChainDefinitionMap">
             <map>
+<!--                <entry key="/static/favicon.png**" value="user"/>-->
                 <entry key="/login" value="anon,captchaValidate"/>
+                <entry key="/**" value="user"/>
             </map>
         </property>
     </bean>
