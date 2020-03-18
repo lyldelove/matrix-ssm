@@ -57,7 +57,7 @@
                         <prop key="kaptcha.textproducer.font.size">35</prop>
                         <!--  KAPTCHA_SESSION_KEY  -->
                         <prop key="kaptcha.session.key">mathKaptchaCode</prop>
-                        <!--    -->
+                        <!--  验证码文本生成器  -->
                         <prop key="kaptcha.textproducer.impl">com.lyldelove.base.kaptcha.KaptchaMathTextCreator</prop>
                         <!--  验证码文本字符间距 默认为2  -->
                         <prop key="kaptcha.textproducer.char.space">3</prop>
