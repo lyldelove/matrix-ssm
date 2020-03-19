@@ -44,7 +44,6 @@
 
     <!--  注册Shiro Relam  -->
     <bean id="userRelam" class="com.lyldelove.base.shiro.UserRealm">
-
     </bean>
 
     <!--  配置Shiro SecurityManager  -->
@@ -66,6 +65,7 @@
         <!--  配置权限  -->
         <property name="filterChainDefinitionMap">
             <map>
+                <!--  静态资源  -->
                 <entry key="/static/favicon.png**" value="anon"/>
                 <entry key="/static/matrix.png**" value="anon"/>
                 <entry key="/static/css/**" value="anon"/>
@@ -75,7 +75,9 @@
                 <entry key="/static/ajax/**" value="anon"/>
                 <entry key="/static/js/**" value="anon"/>
                 <entry key="/static/ruoyi/**" value="anon"/>
-                <entry key="/static/captcha/captchaImage**" value="anon"/>
+                <!--  获取验证码图片  -->
+                <entry key="/captcha/captchaImage**" value="anon"/>
+                <!--  登录  -->
                 <entry key="/login" value="anon,captchaValidate"/>
                 <!--  所有请求需要认证  -->
                 <entry key="/**" value="user"/>

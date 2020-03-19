@@ -5,7 +5,7 @@
     <!--  Kaptcha组件配置  -->
 
     <!--  文本验证码生成器  -->
-    <bean id="kaptchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
         <property name="config">
             <bean class="com.google.code.kaptcha.util.Config">
                 <constructor-arg>
@@ -38,7 +38,7 @@
     </bean>
 
     <!--  数学计算式验证码生成器  -->
-    <bean id="mathKaptchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+    <bean id="mathCaptchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
         <property name="config">
             <bean class="com.google.code.kaptcha.util.Config">
                 <constructor-arg>
@@ -58,7 +58,7 @@
                         <!--  KAPTCHA_SESSION_KEY  -->
                         <prop key="kaptcha.session.key">mathKaptchaCode</prop>
                         <!--  验证码文本生成器  -->
-                        <prop key="kaptcha.textproducer.impl">com.lyldelove.base.kaptcha.KaptchaMathTextCreator</prop>
+                        <prop key="kaptcha.textproducer.impl">com.lyldelove.base.kaptcha.MathCaptchaTextCreator</prop>
                         <!--  验证码文本字符间距 默认为2  -->
                         <prop key="kaptcha.textproducer.char.space">3</prop>
                         <!--  验证码文本字符长度 默认为5  -->
