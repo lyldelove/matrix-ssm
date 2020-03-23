@@ -75,7 +75,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
