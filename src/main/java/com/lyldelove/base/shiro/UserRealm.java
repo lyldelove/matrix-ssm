@@ -1,6 +1,6 @@
 package com.lyldelove.base.shiro;
 
-import com.lyldelove.base.util.string.StringUtils;
+import com.lyldelove.base.util.StringUtil;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.LoginService;
 import org.apache.shiro.authc.*;
@@ -32,7 +32,7 @@ public class UserRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = "";
 
-        if(StringUtils.isNotNull(token.getPassword())) {
+        if(StringUtil.isNotNull(token.getPassword())) {
             password = new String(token.getPassword());
         }
 

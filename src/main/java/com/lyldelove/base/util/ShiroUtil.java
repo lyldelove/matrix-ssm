@@ -1,9 +1,9 @@
-package com.lyldelove.base.util.shiro;
+package com.lyldelove.base.util;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
-public class ShiroUtils {
+public class ShiroUtil {
 
     /**
      * 获取Shiro Session

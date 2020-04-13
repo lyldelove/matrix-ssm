@@ -1,6 +1,6 @@
 package com.lyldelove.base.system;
 
-import com.lyldelove.base.util.string.StringUtils;
+import com.lyldelove.base.util.StringUtil;
 import java.util.HashMap;
 
 public class Result extends HashMap<String, Object> {
@@ -41,7 +41,7 @@ public class Result extends HashMap<String, Object> {
     {
         super.put(CODE_TAG, type.value());
         super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data))
+        if (StringUtil.isNotNull(data))
         {
             super.put(DATA_TAG, data);
         }

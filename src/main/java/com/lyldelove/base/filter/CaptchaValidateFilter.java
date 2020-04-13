@@ -1,8 +1,8 @@
 package com.lyldelove.base.filter;
 
 import com.google.code.kaptcha.Constants;
-import com.lyldelove.base.util.shiro.ShiroUtils;
-import com.lyldelove.base.util.string.StringUtils;
+import com.lyldelove.base.util.ShiroUtil;
+import com.lyldelove.base.util.StringUtil;
 import com.lyldelove.common.constant.ShiroConstant;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
@@ -66,11 +66,11 @@ public class CaptchaValidateFilter extends AccessControlFilter {
         //获取输入的验证码
         String validateCode = httpServletRequest.getParameter(ShiroConstant.CURRENT_VALIDATECODE);
         //获取KAPTCHA生成的key
-        Object object = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        String code = StringUtils.isNull(object) ? "" : object.toString();
+        Object object = ShiroUtil.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String code = StringUtil.isNull(object) ? "" : object.toString();
 
         //进行比较校验
-        if (StringUtils.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
+        if (StringUtil.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
         {
             return false;
         }
