@@ -2,6 +2,7 @@ package com.lyldelove.base.async;
 
 import com.lyldelove.base.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,9 +15,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class AsyncManager {
 
-    //@Autowired
-    //ScheduledExecutorService scheduledExecutorService;
-    private ScheduledExecutorService scheduledExecutorService = SpringUtil.getBean("scheduledExecutorService");
+    @Autowired
+    ScheduledExecutorService scheduledExecutorService;
+    //private ScheduledExecutorService scheduledExecutorService = SpringUtil.getBean("scheduledExecutorService");
 
     /**
      * 操作延迟10毫秒
