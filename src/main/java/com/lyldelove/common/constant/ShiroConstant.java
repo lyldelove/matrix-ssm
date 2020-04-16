@@ -5,25 +5,25 @@ public interface ShiroConstant {
     /**
      * 验证码
      */
-    String CURRENT_VALIDATECODE = "validateCode";
+    String CAPTCHA_CODE = "captchaCode";
 
     /**
      * 验证码开关
      */
-    String CURRENT_ENABLED = "captchaEnabled";
+    String CAPTCHA_ENABLED = "captchaEnabled";
 
     /**
      * 验证码类型
      */
-    String CURRENT_TYPE = "captchaType";
+    String CAPTCHA_TYPE = "captchaType";
 
     /**
-     * 验证码key
+     * 验证码异常
      */
-    String CURRENT_CAPTCHA = "captcha";
+    String CAPTCHA_EXCEPTION = "captchaException";
 
     /**
      * 验证码错误
      */
-    Object CAPTCHA_ERROR = "captchaError";
+    String CAPTCHA_ERROR = "captchaError";
 }

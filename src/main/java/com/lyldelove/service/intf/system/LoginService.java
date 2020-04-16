@@ -10,10 +10,10 @@ import com.lyldelove.entity.system.SysUser;
 public interface LoginService {
 
     /**
-     * 111
-     * @param username
-     * @param password
-     * @return
+     * 登录
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户
      */
     SysUser login(String username, String password);
 }

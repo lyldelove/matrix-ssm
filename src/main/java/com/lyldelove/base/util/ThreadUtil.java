@@ -25,31 +25,25 @@ public class ThreadUtil {
      * @param t Throwable
      */
     public static void printException(Runnable r, Throwable t) {
-        if (t == null && r instanceof Future<?>)
-        {
-            try
-            {
+        //线程任务正常结束，判断线程结束的原因，捕捉异常并记录log
+        if (t == null && r instanceof Future<?>) {
+            try {
                 Future<?> future = (Future<?>) r;
-                if (future.isDone())
-                {
+                if (future.isDone()) {
                     future.get();
                 }
             }
-            catch (CancellationException ce)
-            {
+            catch (CancellationException ce) {
                 t = ce;
             }
-            catch (ExecutionException ee)
-            {
+            catch (ExecutionException ee) {
                 t = ee.getCause();
             }
-            catch (InterruptedException ie)
-            {
+            catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
         }
-        if (t != null)
-        {
+        if (t != null) {
             logger.error(t.getMessage(), t);
         }
     }

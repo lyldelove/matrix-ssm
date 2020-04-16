@@ -43,8 +43,8 @@ public class CaptchaValidateFilter extends AccessControlFilter {
      */
     @Override
     public boolean onPreHandle(ServletRequest servletRequest, ServletResponse servletResponse, Object mappedValue) throws Exception {
-        servletRequest.setAttribute(ShiroConstant.CURRENT_ENABLED, captchaEnabled);
-        servletRequest.setAttribute(ShiroConstant.CURRENT_TYPE, captchaType);
+        servletRequest.setAttribute(ShiroConstant.CAPTCHA_ENABLED, captchaEnabled);
+        servletRequest.setAttribute(ShiroConstant.CAPTCHA_TYPE, captchaType);
         return super.onPreHandle(servletRequest, servletResponse, mappedValue);
     }
 
@@ -64,7 +64,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
             return true;
         }
         //获取输入的验证码
-        String validateCode = httpServletRequest.getParameter(ShiroConstant.CURRENT_VALIDATECODE);
+        String validateCode = httpServletRequest.getParameter(ShiroConstant.CAPTCHA_CODE);
         //获取KAPTCHA生成的key
         Object object = ShiroUtil.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String code = StringUtil.isNull(object) ? "" : object.toString();
@@ -87,7 +87,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
-        servletRequest.setAttribute(ShiroConstant.CURRENT_CAPTCHA, ShiroConstant.CAPTCHA_ERROR);
+        servletRequest.setAttribute(ShiroConstant.CAPTCHA_EXCEPTION, ShiroConstant.CAPTCHA_ERROR);
         return true;
     }
 }

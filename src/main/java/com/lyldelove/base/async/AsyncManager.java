@@ -1,9 +1,6 @@
 package com.lyldelove.base.async;
 
-import com.lyldelove.base.util.SpringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import com.lyldelove.base.spring.SpringContext;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,14 +12,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class AsyncManager {
 
-    @Autowired
-    ScheduledExecutorService scheduledExecutorService;
-    //private ScheduledExecutorService scheduledExecutorService = SpringUtil.getBean("scheduledExecutorService");
-
     /**
      * 操作延迟10毫秒
      */
     private final int OPERATE_DELAY_TIME = 10;
+
+    /**
+     * 异步操作任务调度线程池
+     */
+    private ScheduledExecutorService executor = SpringContext.getBean("scheduledExecutorService");
 
     /**
      * 静态AsyncManager，单例
@@ -43,7 +41,6 @@ public class AsyncManager {
     }
 
     public void execute(TimerTask task) {
-        scheduledExecutorService.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
+        executor.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
     }
-
 }
