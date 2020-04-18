@@ -4,6 +4,8 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author lyldelove
  * @title ServletUtil Servlet工具类
@@ -11,10 +13,19 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public class ServletUtil {
 
-    public static ServletRequestAttributes getRequestAttributes()
-    {
-        //RequestContextHolder 持有上下文的Request容器
+    /**
+     * 使用RequestContextHolder容器，从当前线程中取出请求相关的信息
+     * @return
+     */
+    public static ServletRequestAttributes getRequestAttributes() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         return (ServletRequestAttributes) attributes;
+    }
+
+    /**
+     * 获取请求
+     */
+    public static HttpServletRequest getRequest() {
+        return getRequestAttributes().getRequest();
     }
 }

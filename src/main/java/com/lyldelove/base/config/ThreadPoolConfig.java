@@ -54,6 +54,7 @@ public class ThreadPoolConfig {
         return new ScheduledThreadPoolExecutor(corePoolSize,
                 new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build())
         {
+            //线程完成时的回调
             @Override
             protected void afterExecute(Runnable r, Throwable t)
             {
