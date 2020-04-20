@@ -31,6 +31,7 @@
     <kaptcha.version>2.3.2</kaptcha.version>
     <lombok.version>1.18.10</lombok.version>
     <bitwalker.version>1.21</bitwalker.version>
+    <httpclient.version>4.5.10</httpclient.version>
   </properties>
 
   <dependencies>
@@ -172,6 +173,13 @@
       <groupId>eu.bitwalker</groupId>
       <artifactId>UserAgentUtils</artifactId>
       <version>${bitwalker.version}</version>
+    </dependency>
+
+    <!--  Http请求根据httpClient  -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
     </dependency>
 
   </dependencies>
