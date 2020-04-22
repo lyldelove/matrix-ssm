@@ -7,6 +7,7 @@ import com.lyldelove.base.util.StringUtil;
 import com.lyldelove.common.constant.ShiroConstant;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.LoginService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.TimerTask;

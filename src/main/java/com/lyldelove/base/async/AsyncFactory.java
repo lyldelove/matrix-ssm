@@ -1,5 +1,6 @@
 package com.lyldelove.base.async;
 
+import com.lyldelove.base.util.IPUtil;
 import com.lyldelove.base.util.ServletUtil;
 import com.lyldelove.base.util.ShiroUtil;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -33,7 +34,7 @@ public class AsyncFactory {
         return new TimerTask() {
             @Override
             public void run() {
-
+                String address = IPUtil.getRealAddressByIP(ip);
             }
         };
     }

@@ -225,7 +225,7 @@ public class HttpUtil {
      * 根据请求的方式获取不同的HttpClient
      * @param url 请求地址
      * @return HttpClient
-     * @throws GeneralSecurityException
+     * @throws GeneralSecurityException GeneralSecurityException
      */
     private static CloseableHttpClient getHttpClient(String url) throws GeneralSecurityException {
         if (url.startsWith("https")) {
@@ -237,8 +237,11 @@ public class HttpUtil {
     }
 
     /**
-     * 处理get请求的参数
-     * @return
+     * 处理Get请求参数
+     * @param url 请求地址
+     * @param params 请求参数
+     * @return URI
+     * @throws URISyntaxException URISyntaxException
      */
     private static URI handleGetParams(String url, Map<String, String> params) throws URISyntaxException {
 
@@ -254,12 +257,14 @@ public class HttpUtil {
     }
 
     /**
-     * 处理post请求的参数
-     * @return
+     * 处理Post请求参数
+     * @param httpMethod HttpEntityEnclosingRequestBase
+     * @param params 请求参数
+     * @throws UnsupportedEncodingException UnsupportedEncodingException
      */
     private static void handlePostParams(HttpEntityEnclosingRequestBase httpMethod, Map<String, String> params) throws UnsupportedEncodingException {
         if (params != null) {
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+            List<NameValuePair> nvps = new ArrayList<>();
 
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
@@ -272,8 +277,8 @@ public class HttpUtil {
 
     /**
      * 处理请求的请求头
-     * @param httpMethod
-     * @param headers
+     * @param httpMethod HttpRequestBase
+     * @param headers 请求头
      */
     private static void handleHeaders(HttpRequestBase httpMethod, Map<String, String> headers) {
 
@@ -287,9 +292,9 @@ public class HttpUtil {
 
     /**
      * 处理请求响应response
-     * @param response
+     * @param response HttpResponse
      * @return HttpResult
-     * @throws IOException
+     * @throws IOException IOException
      */
     private static HttpResult handleResponse(HttpResponse response) throws IOException {
 
@@ -307,9 +312,9 @@ public class HttpUtil {
 
     /**
      * 是否资源
-     * @param httpResponse
-     * @param httpClient
-     * @throws IOException
+     * @param httpResponse CloseableHttpResponse
+     * @param httpClient CloseableHttpClient
+     * @throws IOException IOException
      */
     private static void release(CloseableHttpResponse httpResponse, CloseableHttpClient httpClient) throws IOException {
         if (httpResponse != null) {
