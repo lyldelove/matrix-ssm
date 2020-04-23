@@ -1,8 +1,9 @@
 package com.lyldelove.base.async;
 
-import com.lyldelove.base.util.IPUtil;
-import com.lyldelove.base.util.ServletUtil;
-import com.lyldelove.base.util.ShiroUtil;
+import com.lyldelove.common.util.IPUtil;
+import com.lyldelove.common.util.ServletUtil;
+import com.lyldelove.common.util.ShiroUtil;
+import com.lyldelove.common.util.StringUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
  */
 public class AsyncFactory {
 
-    private static final Logger sysUserLogger = LoggerFactory.getLogger("sys-user");
+    private static final Logger USER_LOG = LoggerFactory.getLogger("sys-user");
 
     /**
      * 保存登录的记录
@@ -35,6 +36,15 @@ public class AsyncFactory {
             @Override
             public void run() {
                 String address = IPUtil.getRealAddressByIP(ip);
+                String logInfo = StringUtil.formatWithBlock(ip, address, username, status, message);
+                //日志
+                USER_LOG.info(logInfo, args);
+                //获取客户端操作系统
+                String os= userAgent.getOperatingSystem().getName();
+                //获取客户端浏览器
+                String browser = userAgent.getBrowser().getName();
+                //封装登录信息对象
+
             }
         };
     }

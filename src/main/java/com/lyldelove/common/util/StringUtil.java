@@ -1,4 +1,4 @@
-package com.lyldelove.base.util;
+package com.lyldelove.common.util;
 
 
 import org.springframework.util.StringUtils;
@@ -27,4 +27,20 @@ public class StringUtil extends StringUtils {
     public static boolean isNotNull(Object object) {
         return !isNull(object);
     }
+
+    /**
+     * 使用[]格式化拼接字符
+     * @param args
+     * @return
+     */
+    public static String formatWithBlock(String... args) {
+        String result = "";
+
+        for (String arg : args) {
+            result += "[" + (isNull(arg) ? "" : arg) + "]";
+        }
+
+        return result;
+    }
+
 }

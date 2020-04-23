@@ -1,4 +1,4 @@
-package com.lyldelove.base.util;
+package com.lyldelove.common.util;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;

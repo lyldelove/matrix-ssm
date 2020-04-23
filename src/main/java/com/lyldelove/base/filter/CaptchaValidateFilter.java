@@ -1,8 +1,8 @@
 package com.lyldelove.base.filter;
 
 import com.google.code.kaptcha.Constants;
-import com.lyldelove.base.util.ShiroUtil;
-import com.lyldelove.base.util.StringUtil;
+import com.lyldelove.common.util.ShiroUtil;
+import com.lyldelove.common.util.StringUtil;
 import com.lyldelove.common.constant.ShiroConstant;
 import org.apache.shiro.web.filter.AccessControlFilter;
 

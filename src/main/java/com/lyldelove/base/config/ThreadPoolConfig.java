@@ -1,6 +1,6 @@
 package com.lyldelove.base.config;
 
-import com.lyldelove.base.util.ThreadUtil;
+import com.lyldelove.common.util.ThreadUtil;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

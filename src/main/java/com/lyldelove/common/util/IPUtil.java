@@ -1,6 +1,8 @@
-package com.lyldelove.base.util;
+package com.lyldelove.common.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lyldelove.base.system.HttpResult;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,17 +36,16 @@ public class IPUtil {
 
         HttpResult httpResult = HttpUtil.sendPost(IP_URL, new HashMap<String, String>(){{put("ip", ip);}});
 
-        System.out.println(httpResult.getContent());
-//        if (StringUtil.isEmpty(rspStr)) {
-//            log.error("获取地理位置异常 {}", ip);
-//            return address;
-//        }
-//
-//        JSONObject obj = JSONObject.parseObject(rspStr);
-//        JSONObject data = obj.getObject("data", JSONObject.class);
-//        String region = data.getString("region");
-//        String city = data.getString("city");
-//        address = region + " " + city;
+        if(httpResult.getCode() != HttpStatus.SC_OK) {
+            log.error("获取地理位置异常 {}", ip);
+            return address;
+        }
+
+        JSONObject obj = JSONObject.parseObject(httpResult.getContent());
+        JSONObject data = obj.getObject("data", JSONObject.class);
+        String region = data.getString("region");
+        String city = data.getString("city");
+        address = region + " " + city;
 
         return address;
     }
