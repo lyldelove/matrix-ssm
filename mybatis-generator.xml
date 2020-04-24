@@ -36,8 +36,8 @@
         </javaClientGenerator>
 
         <!--  指定表的生成策略  -->
-        <table tableName="sys_dept"
-               domainObjectName="SysDept"
+        <table tableName="sys_user"
+               domainObjectName="SysUser"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableDeleteByPrimaryKey="true"
@@ -45,7 +45,7 @@
                enableSelectByExample="false"
                enableSelectByPrimaryKey="true"
                enableUpdateByExample="false"
-               enableUpdateByPrimaryKey="true"/>
+               enableUpdateByPrimaryKey="true" />
 
     </context>
 </generatorConfiguration>
