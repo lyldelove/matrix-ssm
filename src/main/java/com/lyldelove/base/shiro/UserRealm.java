@@ -1,6 +1,7 @@
 package com.lyldelove.base.shiro;
 
 import com.lyldelove.common.util.StringUtil;
+import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.LoginService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -35,9 +36,9 @@ public class UserRealm extends AuthorizingRealm {
             password = new String(token.getPassword());
         }
 
-        //SysUser sysUser = null;
+        SysUser sysUser = null;
 
-        //sysUser = loginService.login(username, password);
+        sysUser = loginService.login(username, password);
 
 
         //如果身份认证验证成功，返回一个AuthenticationInfo实现；

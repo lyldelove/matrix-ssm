@@ -5,7 +5,7 @@
 
 <configuration>
     <settings>
-        <!--  其余骆驼命名法则，是的数据库字段可以对应JavaBean属性  -->
+        <!--  启用骆驼命名法则，使得数据库字段可以对应JavaBean属性，如果使用ResultMap就不需要开启  -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 

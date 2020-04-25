@@ -14,7 +14,7 @@
     <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -52,7 +52,7 @@
     values (#{userId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{deleteFlag,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
       )
@@ -151,7 +151,7 @@
         #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
@@ -244,7 +244,7 @@
       mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

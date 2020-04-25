@@ -31,7 +31,7 @@ public class SysUser {
 
     private String avatar;
 
-    private String status;
+    private Integer status;
 
     private String deleteFlag;
 
