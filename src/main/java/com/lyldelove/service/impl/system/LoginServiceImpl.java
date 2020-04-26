@@ -25,6 +25,7 @@ public class LoginServiceImpl implements LoginService {
         if(!StringUtil.isEmpty(ServletUtil.getRequest().getAttribute(ShiroConstant.CAPTCHA_EXCEPTION))) {
             AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message("user.jcaptcha.error")));
         }
+
         return null;
     }
 }
