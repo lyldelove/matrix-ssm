@@ -91,6 +91,12 @@
         <property name="captchaType" value="${shiro.user.captchaType}"/>
     </bean>
 
+    <!--  国际化配置  -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!--  国际化资源文件路径  -->
+        <property name="basename" value="classpath:i18n/messages_zh_CN.properties"/>
+    </bean>
+
     <!--  引入Kaptcha组件配置文件  -->
     <import resource="classpath:spring-kaptcha.xml"/>
 
