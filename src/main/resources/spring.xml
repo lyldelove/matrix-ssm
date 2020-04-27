@@ -94,7 +94,8 @@
     <!--  国际化配置  -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <!--  国际化资源文件路径  -->
-        <property name="basename" value="classpath:i18n/messages_zh_CN.properties"/>
+        <property name="basename" value="i18n/messages"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
 
     <!--  引入Kaptcha组件配置文件  -->

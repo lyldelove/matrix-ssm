@@ -13,6 +13,7 @@ import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.util.TimerTask;
 
 /**
@@ -57,6 +58,7 @@ public class AsyncFactory {
                 loginLog.setBrowser(browser);
                 loginLog.setMessage(message);
                 loginLog.setStatus(LoginConstant.LOGIN_FAIL.equals(status) ? BaseConstant.FAIL : BaseConstant.SUCCESS);
+                loginLog.setLoginTime(LocalDateTime.now());
                 //存入数据库
                 SpringContext.getBean(LoginLogService.class).saveLoginLog(loginLog);
             }

@@ -39,5 +39,4 @@
         <property name="characterEncoding" value="utf-8"/>
     </bean>
 
-
 </beans>
