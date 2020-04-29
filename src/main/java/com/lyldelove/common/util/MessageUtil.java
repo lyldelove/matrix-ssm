@@ -1,6 +1,6 @@
 package com.lyldelove.common.util;
 
-import com.lyldelove.base.spring.SpringContext;
+import com.lyldelove.common.spring.SpringContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 

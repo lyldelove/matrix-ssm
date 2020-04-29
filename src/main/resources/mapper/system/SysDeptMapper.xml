@@ -3,206 +3,68 @@
 <mapper namespace="com.lyldelove.dao.system.SysDeptMapper">
 
   <resultMap id="BaseResultMap" type="com.lyldelove.entity.system.SysDept">
-    <id column="dept_id" jdbcType="BIGINT" property="deptId" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="ancestors" jdbcType="VARCHAR" property="ancestors" />
-    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
-    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
-    <result column="leader" jdbcType="VARCHAR" property="leader" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
-    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <id column="dept_id" property="deptId" />
+    <result column="parent_id" property="parentId" />
+    <result column="ancestors" property="ancestors" />
+    <result column="dept_name" property="deptName" />
+    <result column="order_num" property="orderNum" />
+    <result column="leader" property="leader" />
+    <result column="phone" property="phone" />
+    <result column="email" property="email" />
+    <result column="status" property="status" />
+    <result column="delete_flag" property="deleteFlag" />
+    <result column="create_by" property="createBy" />
+    <result column="create_time" property="createTime" />
+    <result column="update_by" property="updateBy" />
+    <result column="update_time" property="updateTime" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    dept_id, parent_id, ancestors, dept_name, order_num, leader, phone, email, status, 
-    del_flag, create_by, create_time, update_by, update_time
+    dept_id, parent_id, ancestors, dept_name, order_num, leader, phone, email, `status`, 
+    delete_flag, create_by, create_time, update_by, update_time
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_dept
-    where dept_id = #{deptId,jdbcType=BIGINT}
+    where dept_id = #{deptId}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey">
     delete from sys_dept
-    where dept_id = #{deptId,jdbcType=BIGINT}
+    where dept_id = #{deptId}
   </delete>
 
-  <insert id="insert" parameterType="com.lyldelove.entity.system.SysDept">
-    insert into sys_dept (dept_id, parent_id, ancestors, 
-      dept_name, order_num, leader, 
-      phone, email, status, 
-      del_flag, create_by, create_time, 
-      update_by, update_time)
-    values (#{deptId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{ancestors,jdbcType=VARCHAR}, 
-      #{deptName,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{leader,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
-      #{delFlag,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="dept_id" keyProperty="deptId" useGeneratedKeys="true">
+    insert into sys_dept (parent_id, ancestors, dept_name, 
+      order_num, leader, phone, 
+      email, `status`, delete_flag, 
+      create_by, create_time, update_by, 
+      update_time)
+    values (#{parentId}, #{ancestors}, #{deptName}, 
+      #{orderNum}, #{leader}, #{phone}, 
+      #{email}, #{status}, #{deleteFlag}, 
+      #{createBy}, #{createTime}, #{updateBy}, 
+      #{updateTime})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.lyldelove.entity.system.SysDept">
-    insert into sys_dept
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="deptId != null">
-        dept_id,
-      </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="ancestors != null">
-        ancestors,
-      </if>
-      <if test="deptName != null">
-        dept_name,
-      </if>
-      <if test="orderNum != null">
-        order_num,
-      </if>
-      <if test="leader != null">
-        leader,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="delFlag != null">
-        del_flag,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="deptId != null">
-        #{deptId,jdbcType=BIGINT},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="ancestors != null">
-        #{ancestors,jdbcType=VARCHAR},
-      </if>
-      <if test="deptName != null">
-        #{deptName,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNum != null">
-        #{orderNum,jdbcType=INTEGER},
-      </if>
-      <if test="leader != null">
-        #{leader,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="delFlag != null">
-        #{delFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.lyldelove.entity.system.SysDept">
+  <update id="updateByPrimaryKey">
     update sys_dept
-    <set>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="ancestors != null">
-        ancestors = #{ancestors,jdbcType=VARCHAR},
-      </if>
-      <if test="deptName != null">
-        dept_name = #{deptName,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNum != null">
-        order_num = #{orderNum,jdbcType=INTEGER},
-      </if>
-      <if test="leader != null">
-        leader = #{leader,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="delFlag != null">
-        del_flag = #{delFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where dept_id = #{deptId,jdbcType=BIGINT}
-  </update>
-
-  <update id="updateByPrimaryKey" parameterType="com.lyldelove.entity.system.SysDept">
-    update sys_dept
-    set parent_id = #{parentId,jdbcType=BIGINT},
-      ancestors = #{ancestors,jdbcType=VARCHAR},
-      dept_name = #{deptName,jdbcType=VARCHAR},
-      order_num = #{orderNum,jdbcType=INTEGER},
-      leader = #{leader,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      del_flag = #{delFlag,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where dept_id = #{deptId,jdbcType=BIGINT}
+    set parent_id = #{parentId},
+      ancestors = #{ancestors},
+      dept_name = #{deptName},
+      order_num = #{orderNum},
+      leader = #{leader},
+      phone = #{phone},
+      email = #{email},
+      `status` = #{status},
+      delete_flag = #{deleteFlag},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime}
+    where dept_id = #{deptId}
   </update>
 
 </mapper>

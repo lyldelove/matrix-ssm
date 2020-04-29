@@ -1,6 +1,6 @@
 package com.lyldelove.base.async;
 
-import com.lyldelove.base.spring.SpringContext;
+import com.lyldelove.common.spring.SpringContext;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;

@@ -7,11 +7,7 @@ public interface SysDeptMapper {
 
     int insert(SysDept record);
 
-    int insertSelective(SysDept record);
-
     SysDept selectByPrimaryKey(Long deptId);
-
-    int updateByPrimaryKeySelective(SysDept record);
 
     int updateByPrimaryKey(SysDept record);
 }

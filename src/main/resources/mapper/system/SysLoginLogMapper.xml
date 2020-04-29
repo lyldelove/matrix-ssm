@@ -1,150 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyldelove.dao.system.SysLoginLogMapper">
-
+  
   <resultMap id="BaseResultMap" type="com.lyldelove.entity.system.SysLoginLog">
-    <id column="log_id" jdbcType="BIGINT" property="logId" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
-    <result column="login_location" jdbcType="VARCHAR" property="loginLocation" />
-    <result column="os" jdbcType="VARCHAR" property="os" />
-    <result column="browser" jdbcType="VARCHAR" property="browser" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="message" jdbcType="VARCHAR" property="message" />
-    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <id column="log_id"  property="logId" />
+    <result column="login_name"  property="loginName" />
+    <result column="ip_addr"  property="ipAddr" />
+    <result column="login_location"  property="loginLocation" />
+    <result column="os"  property="os" />
+    <result column="browser"  property="browser" />
+    <result column="status"  property="status" />
+    <result column="message"  property="message" />
+    <result column="login_time"  property="loginTime" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    log_id, login_name, ip_addr, login_location, os, browser, status, message, login_time
+    log_id, login_name, ip_addr, login_location, os, browser, `status`, message, login_time
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_login_log
-    where log_id = #{logId,jdbcType=BIGINT}
+    where log_id = #{logId}
   </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey">
     delete from sys_login_log
-    where log_id = #{logId,jdbcType=BIGINT}
+    where log_id = #{logId}
   </delete>
 
-  <insert id="insert" parameterType="com.lyldelove.entity.system.SysLoginLog">
-    insert into sys_login_log (log_id, login_name, ip_addr, 
-      login_location, os, browser, 
-      status, message, login_time
-      )
-    values (#{logId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{ipAddr,jdbcType=VARCHAR}, 
-      #{loginLocation,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" keyColumn="log_id" keyProperty="logId" useGeneratedKeys="true">
+    insert into sys_login_log (login_name, ip_addr, login_location, 
+      os, browser, `status`, 
+      message, login_time)
+    values (#{loginName}, #{ipAddr}, #{loginLocation}, 
+      #{os}, #{browser}, #{status}, 
+      #{message}, #{loginTime})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.lyldelove.entity.system.SysLoginLog">
-    insert into sys_login_log
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="logId != null">
-        log_id,
-      </if>
-      <if test="loginName != null">
-        login_name,
-      </if>
-      <if test="ipAddr != null">
-        ip_addr,
-      </if>
-      <if test="loginLocation != null">
-        login_location,
-      </if>
-      <if test="os != null">
-        os,
-      </if>
-      <if test="browser != null">
-        browser,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="message != null">
-        message,
-      </if>
-      <if test="loginTime != null">
-        login_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="logId != null">
-        #{logId,jdbcType=BIGINT},
-      </if>
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="ipAddr != null">
-        #{ipAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="loginLocation != null">
-        #{loginLocation,jdbcType=VARCHAR},
-      </if>
-      <if test="os != null">
-        #{os,jdbcType=VARCHAR},
-      </if>
-      <if test="browser != null">
-        #{browser,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="message != null">
-        #{message,jdbcType=VARCHAR},
-      </if>
-      <if test="loginTime != null">
-        #{loginTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.lyldelove.entity.system.SysLoginLog">
+  <update id="updateByPrimaryKey">
     update sys_login_log
-    <set>
-      <if test="loginName != null">
-        login_name = #{loginName,jdbcType=VARCHAR},
-      </if>
-      <if test="ipAddr != null">
-        ip_addr = #{ipAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="loginLocation != null">
-        login_location = #{loginLocation,jdbcType=VARCHAR},
-      </if>
-      <if test="os != null">
-        os = #{os,jdbcType=VARCHAR},
-      </if>
-      <if test="browser != null">
-        browser = #{browser,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="message != null">
-        message = #{message,jdbcType=VARCHAR},
-      </if>
-      <if test="loginTime != null">
-        login_time = #{loginTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where log_id = #{logId,jdbcType=BIGINT}
-  </update>
-
-  <update id="updateByPrimaryKey" parameterType="com.lyldelove.entity.system.SysLoginLog">
-    update sys_login_log
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      ip_addr = #{ipAddr,jdbcType=VARCHAR},
-      login_location = #{loginLocation,jdbcType=VARCHAR},
-      os = #{os,jdbcType=VARCHAR},
-      browser = #{browser,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      message = #{message,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=TIMESTAMP}
-    where log_id = #{logId,jdbcType=BIGINT}
+    set login_name = #{loginName},
+      ip_addr = #{ipAddr},
+      login_location = #{loginLocation},
+      os = #{os},
+      browser = #{browser},
+      `status` = #{status},
+      message = #{message},
+      login_time = #{loginTime}
+    where log_id = #{logId}
   </update>
 
 </mapper>

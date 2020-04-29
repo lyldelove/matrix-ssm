@@ -1,4 +1,4 @@
-package com.lyldelove.base.spring;
+package com.lyldelove.common.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

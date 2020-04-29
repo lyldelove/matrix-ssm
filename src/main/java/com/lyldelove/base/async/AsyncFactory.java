@@ -1,6 +1,6 @@
 package com.lyldelove.base.async;
 
-import com.lyldelove.base.spring.SpringContext;
+import com.lyldelove.common.spring.SpringContext;
 import com.lyldelove.common.constant.BaseConstant;
 import com.lyldelove.common.constant.LoginConstant;
 import com.lyldelove.common.util.IPUtil;
