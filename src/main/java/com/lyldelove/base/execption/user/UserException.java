@@ -1,6 +1,7 @@
 package com.lyldelove.base.execption.user;
 
 import com.lyldelove.base.execption.BaseException;
+import com.lyldelove.base.execption.constant.Module;
 
 /**
  * @author lyldelove
@@ -10,6 +11,6 @@ import com.lyldelove.base.execption.BaseException;
 public class UserException extends BaseException {
 
     public UserException(String code, Object[] args) {
-        super("user", code, args, null);
+        super(Module.USER, code, args);
     }
 }

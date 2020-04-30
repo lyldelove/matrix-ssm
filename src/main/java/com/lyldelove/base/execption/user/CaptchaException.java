@@ -1,5 +1,7 @@
 package com.lyldelove.base.execption.user;
 
+import com.lyldelove.base.execption.constant.ExceptionCode;
+
 /**
  * @author lyldelove
  * @title CaptchaException 验证码错误异常
@@ -8,6 +10,6 @@ package com.lyldelove.base.execption.user;
 public class CaptchaException extends UserException {
 
     public CaptchaException() {
-        super("user.captcha.error", null);
+        super(ExceptionCode.USER_CAPTCHA_ERROR, null);
     }
 }

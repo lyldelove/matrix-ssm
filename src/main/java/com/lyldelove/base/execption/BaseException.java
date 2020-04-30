@@ -23,7 +23,7 @@ public class BaseException extends RuntimeException{
     private String code;
 
     /**
-     * 错误码对应的参数
+     * 错误码对应的参数，用于MessageUtil拼装错误消息
      */
     private Object[] args;
 
@@ -44,14 +44,14 @@ public class BaseException extends RuntimeException{
         this(module, code, args, null);
     }
 
-    public BaseException(String module, String message) {
-        this(module, null, null, message);
-    }
-
     public BaseException(String code, Object[] args) {
         this(null, code, args, null);
     }
 
+    /**
+     * 单传message进来，没有code，返回的message不通过MessageUtil处理
+     * @param message
+     */
     public BaseException(String message) {
         this(null, null, null, message);
     }

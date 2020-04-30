@@ -2,6 +2,7 @@ package com.lyldelove.service.impl.system;
 
 import com.lyldelove.base.async.AsyncFactory;
 import com.lyldelove.base.async.AsyncManager;
+import com.lyldelove.base.execption.constant.ExceptionCode;
 import com.lyldelove.base.execption.user.CaptchaException;
 import com.lyldelove.common.constant.LoginConstant;
 import com.lyldelove.common.constant.ShiroConstant;
@@ -24,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
     public SysUser login(String username, String password) {
         //判断验证码是否有异常
         if(!StringUtil.isEmpty(ServletUtil.getRequest().getAttribute(ShiroConstant.CAPTCHA_EXCEPTION))) {
-            AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message("user.captcha.error")));
+            AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message(ExceptionCode.USER_CAPTCHA_ERROR)));
             throw new CaptchaException();
         }
 

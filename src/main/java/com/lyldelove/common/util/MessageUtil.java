@@ -13,9 +13,9 @@ public class MessageUtil {
 
     /**
      * 根据消息键和参数 获取消息 委托给spring messageSource
-     * @param code
-     * @param args
-     * @return
+     * @param code 消息键
+     * @param args 可以填充到对应的消息中，如"{0}", "{1,date}", "{2,time}"
+     * @return String
      */
     public static String message(String code, Object... args) {
         MessageSource messageSource = SpringContext.getBean(MessageSource.class);
