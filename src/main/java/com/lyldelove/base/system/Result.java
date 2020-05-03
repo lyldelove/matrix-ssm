@@ -22,30 +22,35 @@ public class Result extends HashMap<String, Object> {
 
     /**
      * 初始化一个新创建的Result对象
-     * @param type 状态类型
+     * @param code 状态码
      * @param msg 返回内容
      */
-    public Result(ResultType type, String msg)
-    {
-        super.put(CODE_TAG, type.value());
+    public Result(ResultCode code, String msg) {
+        super.put(CODE_TAG, code.value());
         super.put(MSG_TAG, msg);
     }
 
     /**
      * 初始化一个新创建的Result对象
-     * @param type 状态类型
+     * @param code 状态码
      * @param msg 返回内容
      * @param data 数据对象
      */
-    public Result(ResultType type, String msg, Object data)
-    {
-        super.put(CODE_TAG, type.value());
+    public Result(ResultCode code, String msg, Object data) {
+        super.put(CODE_TAG, code.value());
         super.put(MSG_TAG, msg);
-        if (StringUtil.isNotNull(data))
-        {
+        if (StringUtil.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
     }
 
-
+    /**
+     * 成功
+     * @param msg 成功信息
+     * @param data 数据对象
+     * @return Result
+     */
+    public static Result success(String msg, Object data) {
+        return new Result(ResultCode.SUCCESS, msg, data);
+    }
 }

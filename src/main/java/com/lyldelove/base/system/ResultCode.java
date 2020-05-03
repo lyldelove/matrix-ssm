@@ -1,6 +1,6 @@
 package com.lyldelove.base.system;
 
-public enum ResultType {
+public enum ResultCode {
 
     /**
      * 成功
@@ -19,13 +19,11 @@ public enum ResultType {
 
     private final int value;
 
-    ResultType(int value)
-    {
+    ResultCode(int value) {
         this.value = value;
     }
 
-    public int value()
-    {
+    public int value() {
         return this.value;
     }
 }

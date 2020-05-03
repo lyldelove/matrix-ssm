@@ -1,5 +1,6 @@
 package com.lyldelove.base.shiro;
 
+import com.lyldelove.base.execption.user.CaptchaException;
 import com.lyldelove.common.util.StringUtil;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.LoginService;
@@ -38,7 +39,11 @@ public class UserRealm extends AuthorizingRealm {
 
         SysUser sysUser = null;
 
-        sysUser = loginService.login(username, password);
+        try {
+            sysUser = loginService.login(username, password);
+        } catch (CaptchaException e) {
+            throw new AuthenticationException(e.getMessage(), e);
+        }
 
 
         //如果身份认证验证成功，返回一个AuthenticationInfo实现；

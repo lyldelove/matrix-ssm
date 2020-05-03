@@ -30,14 +30,14 @@ public class BaseException extends RuntimeException{
     /**
      * 错误消息
      */
-    private String message;
+    private String exceptionMessage;
 
 
     public BaseException(String module, String code, Object[] args, String message) {
         this.module = module;
         this.code = code;
         this.args = args;
-        this.message = message;
+        this.exceptionMessage = message;
     }
 
     public BaseException(String module, String code, Object[] args) {
@@ -63,7 +63,7 @@ public class BaseException extends RuntimeException{
             msg = MessageUtil.message(code, args);
         }
         if (msg == null) {
-            msg = message;
+            msg = exceptionMessage;
         }
         return msg;
     }
@@ -80,8 +80,12 @@ public class BaseException extends RuntimeException{
         return args;
     }
 
+    public String getExceptionMessage() {
+        return exceptionMessage;
+    }
+
     @Override
     public String toString() {
-        return this.getClass() + "{" + "module='" + module + '\'' + ", message='" + message + '\'' + '}';
+        return this.getClass() + "{" + "module='" + module + '\'' + ", message='" + exceptionMessage + '\'' + '}';
     }
 }
