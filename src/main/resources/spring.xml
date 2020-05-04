@@ -94,7 +94,7 @@
     <!--  国际化配置  -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <!--  国际化资源文件路径  -->
-        <property name="basename" value="i18n/messages"/>
+        <property name="basename" value="i18n/message"/>
         <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
 

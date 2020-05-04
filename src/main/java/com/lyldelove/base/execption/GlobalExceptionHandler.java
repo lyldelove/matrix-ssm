@@ -1,5 +1,7 @@
 package com.lyldelove.base.execption;
 
+import com.lyldelove.base.system.Result;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +19,15 @@ public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
-     * 拦截未知的运行时异常
+     * 处理认证失败异常
+     * @param e AuthenticationException
+     * @return Result
      */
-    @ExceptionHandler(RuntimeException.class)
-    public void notFount(RuntimeException e) {
+    @ExceptionHandler(AuthenticationException.class)
+    public Result handleAuthenticationException(AuthenticationException e) {
+        log.info(e.getMessage(), e);
 
         System.out.println(123);
+        return null;
     }
 }
