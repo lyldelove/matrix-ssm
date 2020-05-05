@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     /**
-     * POST请求的/login，登录界面的表单提交
+     * POST请求的/login，登录界面的表单提交，异常交由全局异常处理
      * @param username 用户名
      * @param password 密码
      * @param rememberMe 记住我
