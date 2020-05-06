@@ -38,6 +38,10 @@
         <property name="serializerFeatures">
             <list>
                 <value>QuoteFieldNames</value>
+                <value>WriteMapNullValue</value>
+                <value>WriteNullStringAsEmpty</value>
+                <value>DisableCircularReferenceDetect</value>
+                <value>WriteNullBooleanAsFalse</value>
             </list>
         </property>
     </bean>
@@ -49,7 +53,14 @@
                 <constructor-arg value="UTF-8" />
             </bean>
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+
+<!--                        <value>text/json;charset=UTF-8</value>-->
+                    </list>
+                </property>
                 <!-- 配置 -->
                 <property name="fastJsonConfig" ref="fastJsonConfig"/>
             </bean>
