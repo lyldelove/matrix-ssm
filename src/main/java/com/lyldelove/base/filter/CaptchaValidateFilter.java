@@ -70,8 +70,7 @@ public class CaptchaValidateFilter extends AccessControlFilter {
         String code = StringUtil.isNull(object) ? "" : object.toString();
 
         //进行比较校验
-        if (StringUtil.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
-        {
+        if (StringUtil.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code)) {
             return false;
         }
 
