@@ -59,7 +59,7 @@
                 <input type="password" name="password" class="form-control pword" placeholder="密码"/>
                 <div class="row m-t" th:if="${captchaEnabled==true}">
                     <div class="col-xs-6">
-                        <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5" autocomplete="off">
+                        <input type="text" name="captchaCode" class="form-control code" placeholder="验证码" maxlength="5" autocomplete="off">
                     </div>
                     <div class="col-xs-6">
                         <a href="javascript:void(0);" title="点击更换验证码">
@@ -164,7 +164,7 @@
         $.modal.loading($("#btnSubmit").data("loading"));
         var username = $.common.trim($("input[name='username']").val());
         var password = $.common.trim($("input[name='password']").val());
-        var validateCode = $("input[name='validateCode']").val();
+        var captchaCode = $("input[name='captchaCode']").val();
         var rememberMe = $("input[name='rememberme']").is(':checked');
         $.ajax({
             type: "post",
@@ -172,7 +172,7 @@
             data: {
                 "username": username,
                 "password": password,
-                "validateCode" : validateCode,
+                "captchaCode" : captchaCode,
                 "rememberMe": rememberMe
             },
             success: function(r) {
