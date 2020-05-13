@@ -78,4 +78,8 @@
     where user_id = #{userId}
   </update>
 
+  <select id="selectUserByLoginName" resultMap="com.lyldelove.entity.system.SysUser">
+
+  </select>
+
 </mapper>

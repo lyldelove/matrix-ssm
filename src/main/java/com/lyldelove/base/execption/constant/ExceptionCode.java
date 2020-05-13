@@ -12,4 +12,10 @@ public interface ExceptionCode {
      * 用户验证码错误
      */
     String USER_CAPTCHA_ERROR = "user.captcha.error";
+
+    /**
+     * 模块：MODULE_USER
+     * 登录名/密码为空
+     */
+    String USER_LOGIN_PARAM_NULL = "user.login.param.null";
 }
