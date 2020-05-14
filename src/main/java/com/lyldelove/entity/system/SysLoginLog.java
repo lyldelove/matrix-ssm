@@ -9,6 +9,9 @@ import lombok.Data;
  */
 @Data
 public class SysLoginLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 日志ID
      */
@@ -53,6 +56,4 @@ public class SysLoginLog implements Serializable {
      * 登录时间
      */
     private LocalDateTime loginTime;
-
-    private static final long serialVersionUID = 1L;
 }

@@ -1,15 +1,18 @@
 package com.lyldelove.entity.system;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import lombok.Data;
+import com.lyldelove.entity.base.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * sys_user
- * @author 
  */
-@Data
-public class SysUser implements Serializable {
+@Getter
+@Setter
+public class SysUser extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 用户ID
      */
@@ -74,31 +77,4 @@ public class SysUser implements Serializable {
      * 删除标识，0 正常，1 删除
      */
     private String deleteFlag;
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人
-     */
-    private String updateBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 备注
-     */
-    private String remark;
-
-    private static final long serialVersionUID = 1L;
 }
