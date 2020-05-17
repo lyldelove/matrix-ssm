@@ -1,6 +1,6 @@
 package com.lyldelove.service.intf.system;
 
-import com.lyldelove.entity.system.SysUser;
+import com.lyldelove.dto.system.User;
 
 public interface UserService {
 
@@ -9,5 +9,5 @@ public interface UserService {
      * @param username
      * @return
      */
-    SysUser selectUserByLoginName(String username);
+    User selectUserByLoginName(String username);
 }

@@ -10,9 +10,13 @@ import com.lyldelove.common.constant.ShiroConstant;
 import com.lyldelove.common.util.MessageUtil;
 import com.lyldelove.common.util.ServletUtil;
 import com.lyldelove.common.util.StringUtil;
+import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.LoginService;
+import com.lyldelove.service.intf.system.UserService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author lyldelove
@@ -21,6 +25,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
+
+    @Resource
+    private UserService userService;
 
     @Override
     public SysUser login(String username, String password) {
@@ -35,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
             throw new LoginParamNullException();
         }
         //查询用户信息
-        //SysUser sysUser =
+        User user = userService.selectUserByLoginName("");
 
         return null;
     }

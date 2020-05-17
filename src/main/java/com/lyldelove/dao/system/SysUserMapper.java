@@ -1,5 +1,6 @@
 package com.lyldelove.dao.system;
 
+import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
 
 public interface SysUserMapper {
@@ -17,5 +18,5 @@ public interface SysUserMapper {
      * @param username
      * @return
      */
-    SysUser selectUserByLoginName(String username);
+    User selectUserByLoginName(String username);
 }

@@ -1,6 +1,7 @@
 package com.lyldelove.service.impl.system;
 
 import com.lyldelove.dao.system.SysUserMapper;
+import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.UserService;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public SysUser selectUserByLoginName(String username) {
+    public User selectUserByLoginName(String username) {
         return sysUserMapper.selectUserByLoginName(username);
     }
 }

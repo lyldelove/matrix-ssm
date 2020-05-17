@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyldelove.dao.system.SysUserMapper">
   
-  <resultMap id="BaseResultMap" type="com.lyldelove.entity.system.SysUser">
+  <resultMap id="SysUser" type="com.lyldelove.entity.system.SysUser">
     <id column="user_id"  property="userId" />
     <result column="dept_id"  property="deptId" />
     <result column="login_name"  property="loginName" />
@@ -23,15 +23,52 @@
     <result column="remark"  property="remark" />
   </resultMap>
 
-  <sql id="Base_Column_List">
+  <resultMap id="SysDept" type="com.lyldelove.entity.system.SysDept">
+    <id column="dept_id" property="deptId" />
+    <result column="parent_id" property="parentId" />
+    <result column="dept_name" property="deptName" />
+    <result column="order_num" property="orderNum" />
+    <result column="leader" property="leader" />
+    <result column="dept_status" property="status" />
+    <result column="dept_delete_flag" property="deleteFlag" />
+  </resultMap>
+
+  <resultMap id="SysRole" type="com.lyldelove.entity.system.SysRole">
+    <id column="role_id"  property="roleId" />
+    <result column="role_name"  property="roleName" />
+    <result column="role_key"  property="roleKey" />
+    <result column="role_sort"  property="roleSort" />
+    <result column="data_scope"  property="dataScope" />
+    <result column="role_status"  property="status" />
+    <result column="role_delete_flag"  property="deleteFlag" />
+  </resultMap>
+
+  <resultMap id="User" type="com.lyldelove.dto.system.User">
+    <association property="sysUser" column="user_id" resultMap="SysUser"/>
+    <association property="sysDept" column="dept_id" resultMap="SysDept"/>
+    <collection property="sysRoles" ofType="com.lyldelove.entity.system.SysRole" resultMap="SysRole"/>
+  </resultMap>
+
+  <sql id="selectSysUser">
     user_id, dept_id, login_name, user_name, user_type, `password`, salt, email, mobile_phone, 
     sex, avatar, `status`, delete_flag, create_by, create_time, update_by, update_time, 
     remark
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+  <sql id="selectUser">
+    select su.user_id, su.dept_id, su.login_name, su.user_name, su.user_type, su.password, su.salt, su.email, su.mobile_phone, su.sex,
+        su.avatar, su.status, su.delete_flag, su.create_by, su.create_time, su.update_by, su.update_time, su.remark,
+        sd.parent_id, sd.dept_name, sd.order_num, sd.leader, sd.status as dept_status, sd.delete_flag as dept_delete_flag,
+        sr.role_id, sr.role_name, sr.role_key, sr.role_sort, sr.data_scope, sr.status as role_status, sr.delete_flag as role_delete_flag
+        from sys_user su
+            left join sys_dept sd on su.dept_id = sd.dept_id
+            left join sys_user_role sur on su.user_id = sur.user_id
+            left join sys_role sr  on sur.role_id = sr.role_id
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="SysUser">
     select 
-    <include refid="Base_Column_List" />
+    <include refid="selectSysUser" />
     from sys_user
     where user_id = #{userId}
   </select>
@@ -78,8 +115,8 @@
     where user_id = #{userId}
   </update>
 
-  <select id="selectUserByLoginName" resultMap="com.lyldelove.entity.system.SysUser">
-
+  <select id="selectUserByLoginName" resultMap="User">
+    <include refid="selectUser"/>
   </select>
 
 </mapper>
