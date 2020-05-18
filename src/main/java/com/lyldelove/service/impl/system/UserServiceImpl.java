@@ -21,11 +21,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户名查询用户
-     * @param username
+     * @param loginName
      * @return
      */
     @Override
-    public User selectUserByLoginName(String username) {
-        return sysUserMapper.selectUserByLoginName(username);
+    public User selectUserByLoginName(String loginName) {
+        return sysUserMapper.selectUserByLoginName(loginName);
     }
 }

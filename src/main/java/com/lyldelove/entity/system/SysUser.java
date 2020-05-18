@@ -4,6 +4,8 @@ import com.lyldelove.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * sys_user
  */
@@ -77,4 +79,14 @@ public class SysUser extends BaseEntity {
      * 删除标识，0 正常，1 删除
      */
     private String deleteFlag;
+
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+
+    /**
+     * 最后登录时间
+     */
+    private LocalDateTime loginTime;
 }

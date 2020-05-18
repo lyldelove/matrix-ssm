@@ -42,7 +42,11 @@ public class LoginServiceImpl implements LoginService {
             throw new LoginParamNullException();
         }
         //查询用户信息
-        User user = userService.selectUserByLoginName("");
+        User user = userService.selectUserByLoginName(username);
+
+        if(StringUtil.isNull(user) && StringUtil.isMobilePhoneNumber(username)) {
+
+        }
 
         return null;
     }
