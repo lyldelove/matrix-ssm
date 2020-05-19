@@ -59,7 +59,7 @@ public class SysDept extends BaseEntity {
     private String status;
 
     /**
-     * 删除标识，0 正常，1 删除
+     * 删除标识，0 正常，2 删除
      */
     private String deleteFlag;
 }

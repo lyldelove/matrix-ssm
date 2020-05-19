@@ -2,9 +2,9 @@ package com.lyldelove.service.impl.system;
 
 import com.lyldelove.base.async.AsyncFactory;
 import com.lyldelove.base.async.AsyncManager;
+import com.lyldelove.base.enums.UserStatus;
 import com.lyldelove.base.execption.constant.ExceptionCode;
-import com.lyldelove.base.execption.user.CaptchaException;
-import com.lyldelove.base.execption.user.LoginParamNullException;
+import com.lyldelove.base.execption.user.*;
 import com.lyldelove.common.constant.LoginConstant;
 import com.lyldelove.common.constant.ShiroConstant;
 import com.lyldelove.common.util.MessageUtil;
@@ -44,9 +44,31 @@ public class LoginServiceImpl implements LoginService {
         //查询用户信息
         User user = userService.selectUserByLoginName(username);
 
+        //手机号登陆
         if(StringUtil.isNull(user) && StringUtil.isMobilePhoneNumber(username)) {
-
+            user = userService.selectUserByMobilePhoneNumber(username);
         }
+        //邮件地址登录
+        if(StringUtil.isNull(user) && StringUtil.isEmail(username)) {
+            user = userService.selectUserByEmail(username);
+        }
+
+        if(StringUtil.isNull(user)) {
+            AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message(ExceptionCode.USER_NOT_EXIST)));
+            throw new UserNotExistException();
+        }
+
+        if(UserStatus.DISABLE.getCode().equals(user.getStatus())) {
+            AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message(ExceptionCode.USER_DISABLE)));
+            throw new UserDisableException();
+        }
+
+        if (UserStatus.DELETE.getCode().equals(user.getDeleteFlag())) {
+            AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(username, LoginConstant.LOGIN_FAIL, MessageUtil.message(ExceptionCode.USER_DELETE)));
+            throw new UserDeleteException();
+        }
+
+
 
         return null;
     }

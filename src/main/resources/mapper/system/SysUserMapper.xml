@@ -85,7 +85,7 @@
             left join sys_dept sd on su.dept_id = sd.dept_id
             left join sys_user_role sur on su.user_id = sur.user_id
             left join sys_role sr  on sur.role_id = sr.role_id
-  </sql>
+    </sql>
 
     <select id="selectByPrimaryKey" resultMap="SysUser">
         select
@@ -97,7 +97,7 @@
     <delete id="deleteByPrimaryKey">
     delete from sys_user
     where user_id = #{userId}
-  </delete>
+    </delete>
 
     <insert id="insert" keyColumn="user_id" keyProperty="userId" useGeneratedKeys="true">
     insert into sys_user (dept_id, login_name, user_name, 
@@ -112,7 +112,7 @@
       #{avatar}, #{status}, #{deleteFlag}, 
       #{createBy}, #{createTime}, #{updateBy}, 
       #{updateTime}, #{remark})
-  </insert>
+    </insert>
 
     <update id="updateByPrimaryKey">
     update sys_user
@@ -134,11 +134,21 @@
       update_time = #{updateTime},
       remark = #{remark}
     where user_id = #{userId}
-  </update>
+    </update>
 
     <select id="selectUserByLoginName" resultMap="User">
         <include refid="selectUser"/>
         where su.login_name = #{loginName}
+    </select>
+
+    <select id="selectUserByMobilePhoneNumber" resultMap="User">
+        <include refid="selectUser"/>
+        where su.mobile_phone_number = #{mobilePhoneNumber}
+    </select>
+
+    <select id="selectUserByEmail" resultMap="User">
+        <include refid="selectUser"/>
+        where su.email = #{email}
     </select>
 
 </mapper>

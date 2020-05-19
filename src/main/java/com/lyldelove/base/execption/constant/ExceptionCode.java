@@ -18,4 +18,22 @@ public interface ExceptionCode {
      * 登录名/密码为空
      */
     String USER_LOGIN_PARAM_NULL = "user.login.param.null";
+
+    /**
+     * 模块：MODULE_USER
+     * 用户不存在
+     */
+    String USER_NOT_EXIST = "user.not.exist";
+
+    /**
+     * 模块：MODULE_USER
+     * 用户禁用
+     */
+    String USER_DISABLE = "user.disable";
+
+    /**
+     * 模块：MODULE_USER
+     * 用户已删除
+     */
+    String USER_DELETE = "user.delete";
 }

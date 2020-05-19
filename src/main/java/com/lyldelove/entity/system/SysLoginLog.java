@@ -45,7 +45,7 @@ public class SysLoginLog implements Serializable {
     /**
      * 登录状态 0成功 1失败
      */
-    private Integer status;
+    private String status;
 
     /**
      * 提示信息

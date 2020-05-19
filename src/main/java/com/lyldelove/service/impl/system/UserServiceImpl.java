@@ -28,4 +28,24 @@ public class UserServiceImpl implements UserService {
     public User selectUserByLoginName(String loginName) {
         return sysUserMapper.selectUserByLoginName(loginName);
     }
+
+    /**
+     * 根据用户手机号码查询用户
+     * @param mobilePhoneNumber
+     * @return
+     */
+    @Override
+    public User selectUserByMobilePhoneNumber(String mobilePhoneNumber) {
+        return sysUserMapper.selectUserByMobilePhoneNumber(mobilePhoneNumber);
+    }
+
+    /**
+     * 根据用户邮箱查询用户
+     * @param email
+     * @return
+     */
+    @Override
+    public User selectUserByEmail(String email) {
+        return sysUserMapper.selectUserByEmail(email);
+    }
 }

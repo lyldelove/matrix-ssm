@@ -19,4 +19,18 @@ public interface SysUserMapper {
      * @return
      */
     User selectUserByLoginName(String loginName);
+
+    /**
+     * 根据用户手机号码查询用户
+     * @param mobilePhoneNumber
+     * @return
+     */
+    User selectUserByMobilePhoneNumber(String mobilePhoneNumber);
+
+    /**
+     * 根据用户邮箱查询用户
+     * @param email
+     * @return
+     */
+    User selectUserByEmail(String email);
 }

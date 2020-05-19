@@ -34,12 +34,15 @@ public class SysRole extends BaseEntity {
      */
     private Integer roleSort;
 
+    /**
+     * 数据范围，1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限
+     */
     private String dataScope;
 
     /**
-     * 状态
+     * 角色状态，0 正常， 1 停用
      */
-    private Integer status;
+    private String status;
 
     /**
      * 删除标识，0 正常，1 删除
