@@ -1,7 +1,5 @@
 package com.lyldelove.service.intf.system;
 
-import com.lyldelove.dto.system.User;
-
 public interface PasswordService {
 
     /**
@@ -15,9 +13,11 @@ public interface PasswordService {
 
     /**
      * 判断密码是否相等
-     * @param user
+     * @param username
      * @param password
+     * @param salt
+     * @param inputPassword
      * @return
      */
-    boolean matches(User user, String password);
+    boolean matches(String username, String password, String salt, String inputPassword);
 }

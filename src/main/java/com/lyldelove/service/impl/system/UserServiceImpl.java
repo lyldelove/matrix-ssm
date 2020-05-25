@@ -1,7 +1,6 @@
 package com.lyldelove.service.impl.system;
 
 import com.lyldelove.dao.system.SysUserMapper;
-import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
 import com.lyldelove.service.intf.system.UserService;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User selectUserByLoginName(String loginName) {
+    public SysUser selectUserByLoginName(String loginName) {
         return sysUserMapper.selectUserByLoginName(loginName);
     }
 
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User selectUserByMobilePhoneNumber(String mobilePhoneNumber) {
+    public SysUser selectUserByMobilePhoneNumber(String mobilePhoneNumber) {
         return sysUserMapper.selectUserByMobilePhoneNumber(mobilePhoneNumber);
     }
 
@@ -45,7 +44,16 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User selectUserByEmail(String email) {
+    public SysUser selectUserByEmail(String email) {
         return sysUserMapper.selectUserByEmail(email);
+    }
+
+    /**
+     * 更新用户信息
+     * @param sysUser
+     */
+    @Override
+    public void updateUserInfo(SysUser sysUser) {
+        sysUserMapper.updateByPrimaryKey(sysUser);
     }
 }

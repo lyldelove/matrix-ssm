@@ -2,6 +2,7 @@ package com.lyldelove.service.impl.system;
 
 import com.lyldelove.dto.system.User;
 import com.lyldelove.service.intf.system.PasswordService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,11 +15,11 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public String encryptPassword(String username, String password, String salt) {
-        return null;
+        return new Md5Hash(username + password + salt).toHex();
     }
 
     @Override
-    public boolean matches(User user, String password) {
-        return false;
+    public boolean matches(String username, String password, String salt, String inputPassword) {
+        return password.equals(encryptPassword(username, inputPassword, salt));
     }
 }

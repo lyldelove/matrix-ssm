@@ -2,7 +2,6 @@ package com.lyldelove.dao.system;
 
 import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
-import org.apache.ibatis.annotations.Param;
 
 public interface SysUserMapper {
 
@@ -19,19 +18,19 @@ public interface SysUserMapper {
      * @param loginName
      * @return
      */
-    User selectUserByLoginName(String loginName);
+    SysUser selectUserByLoginName(String loginName);
 
     /**
      * 根据用户手机号码查询用户
      * @param mobilePhoneNumber
      * @return
      */
-    User selectUserByMobilePhoneNumber(String mobilePhoneNumber);
+    SysUser selectUserByMobilePhoneNumber(String mobilePhoneNumber);
 
     /**
      * 根据用户邮箱查询用户
      * @param email
      * @return
      */
-    User selectUserByEmail(String email);
+    SysUser selectUserByEmail(String email);
 }

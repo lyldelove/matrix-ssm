@@ -72,7 +72,7 @@
 
     <sql id="selectSysUser">
     user_id, dept_id, login_name, user_name, user_type, `password`, salt, email, mobile_phone, 
-    sex, avatar, `status`, delete_flag, create_by, create_time, update_by, update_time, 
+    sex, avatar, `status`, delete_flag, login_ip, login_time, create_by, create_time, update_by, update_time,
     remark
   </sql>
 
@@ -103,13 +103,15 @@
     insert into sys_user (dept_id, login_name, user_name, 
       user_type, `password`, salt, 
       email, mobile_phone, sex, 
-      avatar, `status`, delete_flag, 
+      avatar, `status`, delete_flag,
+      login_ip, login_time,
       create_by, create_time, update_by, 
       update_time, remark)
     values (#{deptId}, #{loginName}, #{userName}, 
       #{userType}, #{password}, #{salt}, 
       #{email}, #{mobilePhone}, #{sex}, 
-      #{avatar}, #{status}, #{deleteFlag}, 
+      #{avatar}, #{status}, #{deleteFlag},
+      #{loginIp}, #{loginTime},
       #{createBy}, #{createTime}, #{updateBy}, 
       #{updateTime}, #{remark})
     </insert>
@@ -128,6 +130,8 @@
       avatar = #{avatar},
       `status` = #{status},
       delete_flag = #{deleteFlag},
+      login_ip = #{loginIp},
+      login_time = #{loginTime},
       create_by = #{createBy},
       create_time = #{createTime},
       update_by = #{updateBy},
@@ -137,18 +141,24 @@
     </update>
 
     <select id="selectUserByLoginName" resultMap="User">
-        <include refid="selectUser"/>
-        where su.login_name = #{loginName}
+        select
+        <include refid="selectSysUser"/>
+        from sys_user
+        where login_name = #{loginName}
     </select>
 
     <select id="selectUserByMobilePhoneNumber" resultMap="User">
-        <include refid="selectUser"/>
-        where su.mobile_phone_number = #{mobilePhoneNumber}
+        select
+        <include refid="selectSysUser"/>
+        from sys_user
+        where mobile_phone_number = #{mobilePhoneNumber}
     </select>
 
     <select id="selectUserByEmail" resultMap="User">
-        <include refid="selectUser"/>
-        where su.email = #{email}
+        select
+        <include refid="selectSysUser"/>
+        from sys_user
+        where email = #{email}
     </select>
 
 </mapper>

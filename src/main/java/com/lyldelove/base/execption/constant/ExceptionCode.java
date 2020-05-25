@@ -36,4 +36,16 @@ public interface ExceptionCode {
      * 用户已删除
      */
     String USER_DELETE = "user.delete";
+
+    /**
+     * 模块：MODULE_USER
+     * 用户输入密码错误次数超过限制
+     */
+    String USER_PASSWORD_RETRY_LIMIT_EXCEED = "user.password.retry.limit.exceed";
+
+    /**
+     * 模块：MODULE_USER
+     * 用户密码不匹配
+     */
+    String USER_PASSWORD_NOT_MATCH = "user.password.not.match";
 }
