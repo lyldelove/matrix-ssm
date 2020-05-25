@@ -26,4 +26,6 @@ public interface ShiroConstant {
      * 验证码错误
      */
     String CAPTCHA_ERROR = "captchaError";
+
+    String LOGIN_RECORD_CACHE = "loginRecordCache";
 }

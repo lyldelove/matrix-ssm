@@ -12,11 +12,14 @@ import com.lyldelove.common.util.ServletUtil;
 import com.lyldelove.common.util.StringUtil;
 import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
+import com.lyldelove.service.intf.system.LoginRecordCacheService;
 import com.lyldelove.service.intf.system.LoginService;
 import com.lyldelove.service.intf.system.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author lyldelove
@@ -28,6 +31,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private LoginRecordCacheService loginRecordCacheService;
+
+    @Value("${user.password.maxRetryCount}")
+    private String maxRetryCount;
 
     @Override
     public SysUser login(String username, String password) {
@@ -68,6 +77,20 @@ public class LoginServiceImpl implements LoginService {
             throw new UserDeleteException();
         }
 
+        //缓存中查找密码错误次数
+        String loginName = user.getLoginName();
+        AtomicInteger retryCount = loginRecordCacheService.get(loginName);
+
+        if (StringUtil.isNull(retryCount)) {
+            retryCount = new AtomicInteger(0);
+            loginRecordCacheService.put(loginName, retryCount);
+        }
+
+        if (retryCount.incrementAndGet() > Integer.valueOf(maxRetryCount)) {
+
+
+
+        }
 
 
         return null;
