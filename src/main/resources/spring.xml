@@ -46,15 +46,33 @@
     <bean id="userRelam" class="com.lyldelove.base.shiro.UserRealm">
     </bean>
 
-    <!--  缓存管理器  -->
+    <!--  缓存管理器, 这里用ehcache插件(已被shiro集成)  -->
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
+    </bean>
+
+    <!--手动指定cookie-->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="domain" value="${shiro.cookie.domain}"/>
+        <property name="path" value="${shiro.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.cookie.maxAge}"/><!-- 7天 -->
+    </bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!--注入自定义cookie(主要是设置寿命, 默认的一年太长)-->
+        <property name="cookie" ref="rememberMeCookie"/>
     </bean>
 
     <!--  配置Shiro SecurityManager  -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRelam"/>
+        <!--注入缓存管理器-->
         <property name="cacheManager" ref="cacheManager"/>
+        <!--注入rememberMe cookie管理器-->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一致  -->

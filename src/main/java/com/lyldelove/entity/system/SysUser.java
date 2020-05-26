@@ -81,7 +81,7 @@ public class SysUser extends BaseEntity {
     private String deleteFlag;
 
     /**
-     * 最后登录IP
+     * 最后登录IPe
      */
     private String loginIp;
 

@@ -1,6 +1,5 @@
 package com.lyldelove.service.impl.system;
 
-import com.lyldelove.dto.system.User;
 import com.lyldelove.service.intf.system.PasswordService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;

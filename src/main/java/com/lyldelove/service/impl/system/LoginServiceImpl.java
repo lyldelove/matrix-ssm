@@ -90,6 +90,7 @@ public class LoginServiceImpl implements LoginService {
             loginRecordCacheService.put(loginName, retryCount);
         }
 
+        //等缓存自动到达最长空余时间失效后，才能重新登陆
         int maxRetry = Integer.valueOf(maxRetryCount);
         if (retryCount.incrementAndGet() > maxRetry) {
             AsyncManager.getManager().execute(AsyncFactory.saveLoginLog(loginName, LoginConstant.LOGIN_FAIL, MessageUtil.message(LoginConstant.USER_PASSWORD_RETRY_LIMIT_EXCEED, maxRetry)));

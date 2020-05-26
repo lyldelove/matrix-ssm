@@ -99,7 +99,7 @@
     where user_id = #{userId}
     </delete>
 
-    <insert id="insert" keyColumn="user_id" keyProperty="userId" useGeneratedKeys="true">
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
     insert into sys_user (dept_id, login_name, user_name, 
       user_type, `password`, salt, 
       email, mobile_phone, sex, 
@@ -140,21 +140,21 @@
     where user_id = #{userId}
     </update>
 
-    <select id="selectUserByLoginName" resultMap="User">
+    <select id="selectUserByLoginName" resultMap="SysUser">
         select
         <include refid="selectSysUser"/>
         from sys_user
         where login_name = #{loginName}
     </select>
 
-    <select id="selectUserByMobilePhoneNumber" resultMap="User">
+    <select id="selectUserByMobilePhoneNumber" resultMap="SysUser">
         select
         <include refid="selectSysUser"/>
         from sys_user
         where mobile_phone_number = #{mobilePhoneNumber}
     </select>
 
-    <select id="selectUserByEmail" resultMap="User">
+    <select id="selectUserByEmail" resultMap="SysUser">
         select
         <include refid="selectSysUser"/>
         from sys_user
