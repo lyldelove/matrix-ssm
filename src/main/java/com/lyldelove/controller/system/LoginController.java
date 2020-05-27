@@ -30,6 +30,7 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public Result signIn(String username, String password, Boolean rememberMe) throws AuthenticationException {
+        //开启rememberMe功能
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
 
         Subject subject = SecurityUtils.getSubject();
