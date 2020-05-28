@@ -1,6 +1,7 @@
 package com.lyldelove.controller.system;
 
 import com.lyldelove.base.system.Result;
+import com.lyldelove.controller.BaseController;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -8,8 +9,10 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import static com.lyldelove.base.system.Result.success;
+
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
     /**
      * GET请求的/login，跳转到登录界面
@@ -36,7 +39,7 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
 
-        return Result.success();
+        return success();
     }
 
 }
