@@ -89,4 +89,21 @@ public class SysUser extends BaseEntity {
      * 最后登录时间
      */
     private LocalDateTime loginTime;
+
+    /**
+     * 根据userId判断是否是管理员账号
+     * @param userId
+     * @return
+     */
+    public static boolean isAdmin(Long userId) {
+        return userId != null && 1L == userId;
+    }
+
+    /**
+     * 根据userId判断是否是管理员账号
+     * @return
+     */
+    public boolean isAdmin() {
+        return isAdmin(this.userId);
+    }
 }

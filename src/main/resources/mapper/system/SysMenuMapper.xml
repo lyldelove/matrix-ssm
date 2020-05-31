@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyldelove.dao.system.SysMenuMapper">
+
+  <resultMap id="SysMenu" type="com.lyldelove.entity.system.SysMenu">
+    <id column="menu_id"  property="menuId" />
+    <result column="parent_id"  property="parentId" />
+    <result column="menu_name"  property="menuName" />
+    <result column="order_num"  property="orderNum" />
+    <result column="url"  property="url" />
+    <result column="target"  property="target" />
+    <result column="menu_type"  property="menuType" />
+    <result column="visible"  property="visible" />
+    <result column="perms"  property="perms" />
+    <result column="icon"  property="icon" />
+    <result column="create_by"  property="createBy" />
+    <result column="create_time"  property="createTime" />
+    <result column="update_by"  property="updateBy" />
+    <result column="update_time"  property="updateTime" />
+    <result column="remark"  property="remark" />
+  </resultMap>
+
+  <sql id="selectSysMenu">
+    menu_id, parent_id, menu_name, order_num, url, target, menu_type, visible, ifnull(perms, '') as perms,
+    icon, create_by, create_time, update_by, update_time, remark
+  </sql>
+
+  <select id="selectByPrimaryKey"  resultMap="SysMenu">
+    select 
+    <include refid="selectSysMenu" />
+    from sys_menu
+    where menu_id = #{menuId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" >
+    delete from sys_menu
+    where menu_id = #{menuId}
+  </delete>
+
+  <insert id="insert" keyColumn="menu_id" keyProperty="menuId"  useGeneratedKeys="true">
+    insert into sys_menu (parent_id, menu_name, order_num, 
+      url, target, menu_type, 
+      visible, perms, icon, 
+      create_by, create_time, update_by, 
+      update_time, remark)
+    values (#{parentId}, #{menuName}, #{orderNum}, 
+      #{url}, #{target}, #{menuType}, 
+      #{visible}, #{perms}, #{icon}, 
+      #{createBy}, #{createTime}, #{updateBy}, 
+      #{updateTime}, #{remark})
+  </insert>
+
+  <update id="updateByPrimaryKey" >
+    update sys_menu
+    set parent_id = #{parentId},
+      menu_name = #{menuName},
+      order_num = #{orderNum},
+      url = #{url},
+      target = #{target},
+      menu_type = #{menuType},
+      visible = #{visible},
+      perms = #{perms},
+      icon = #{icon},
+      create_by = #{createBy},
+      create_time = #{createTime},
+      update_by = #{updateBy},
+      update_time = #{updateTime},
+      remark = #{remark}
+    where menu_id = #{menuId}
+  </update>
+
+  <select id="selectMenuNormalAll" resultMap="SysMenu">
+    select
+    <include refid="selectSysMenu" />
+    from sys_menu
+    where menu_type in ('M', 'C') and visible = 0
+    order by parent_id, order_num
+  </select>
+
+  <select id="selectMenuByUserId" resultMap="SysMenu">
+    select distinct sm.menu_id, sm.parent_id, sm.menu_name, sm.url, sm.visible, ifnull(sm.perms,'') as perms, sm.target, sm.menu_type, sm.icon, sm.order_num, sm.create_time
+    from sys_menu sm
+         left join sys_role_menu srm on sm.menu_id = srm.menu_id
+         left join sys_user_role sur on srm.role_id = sur.role_id
+         LEFT JOIN sys_role sr on sur.role_id = sr.role_id
+    where sur.user_id = #{userId} and sm.menu_type in ('M', 'C') and sm.visible = 0  AND sr.status = 0
+    order by m.parent_id, m.order_num
+  </select>
+</mapper>

@@ -23,7 +23,7 @@ public class IndexController extends BaseController {
     public String login(ModelMap modelMap) {
         //获取当前用户信息
         SysUser sysUser = getSysUser();
-        //根据用户ID获取权限菜单信息
+        //根据用户ID获取用户的权限菜单信息
 
 
         return "index";
