@@ -20,6 +20,24 @@
     <result column="remark"  property="remark" />
   </resultMap>
 
+  <resultMap id="Menu" type="com.lyldelove.dto.system.Menu">
+    <id column="menu_id"  property="menuId" />
+    <result column="parent_id"  property="parentId" />
+    <result column="menu_name"  property="menuName" />
+    <result column="order_num"  property="orderNum" />
+    <result column="url"  property="url" />
+    <result column="target"  property="target" />
+    <result column="menu_type"  property="menuType" />
+    <result column="visible"  property="visible" />
+    <result column="perms"  property="perms" />
+    <result column="icon"  property="icon" />
+    <result column="create_by"  property="createBy" />
+    <result column="create_time"  property="createTime" />
+    <result column="update_by"  property="updateBy" />
+    <result column="update_time"  property="updateTime" />
+    <result column="remark"  property="remark" />
+  </resultMap>
+
   <sql id="selectSysMenu">
     menu_id, parent_id, menu_name, order_num, url, target, menu_type, visible, ifnull(perms, '') as perms,
     icon, create_by, create_time, update_by, update_time, remark
@@ -69,7 +87,7 @@
     where menu_id = #{menuId}
   </update>
 
-  <select id="selectMenuNormalAll" resultMap="SysMenu">
+  <select id="selectMenuNormalAll" resultMap="Menu">
     select
     <include refid="selectSysMenu" />
     from sys_menu
@@ -77,13 +95,13 @@
     order by parent_id, order_num
   </select>
 
-  <select id="selectMenuByUserId" resultMap="SysMenu">
+  <select id="selectMenuByUserId" resultMap="Menu">
     select distinct sm.menu_id, sm.parent_id, sm.menu_name, sm.url, sm.visible, ifnull(sm.perms,'') as perms, sm.target, sm.menu_type, sm.icon, sm.order_num, sm.create_time
     from sys_menu sm
          left join sys_role_menu srm on sm.menu_id = srm.menu_id
          left join sys_user_role sur on srm.role_id = sur.role_id
          LEFT JOIN sys_role sr on sur.role_id = sr.role_id
     where sur.user_id = #{userId} and sm.menu_type in ('M', 'C') and sm.visible = 0  AND sr.status = 0
-    order by m.parent_id, m.order_num
+    order by sm.parent_id, sm.order_num
   </select>
 </mapper>

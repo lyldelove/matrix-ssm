@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <title>若依系统首页</title>
+
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
-    <link th:href="@{favicon.ico}" rel="stylesheet"/>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link th:href="@{/css/skins.css}" rel="stylesheet"/>
-    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.1.0}" rel="stylesheet"/>
+
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../../static/css/font-awesome.min.css" th:href="@{/static/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../../static/css/style.css" th:href="@{/static/css/style.css}" rel="stylesheet"/>
+    <link href="../../static/ruoyi/css/ry-ui.css" th:href="@{/static/ruoyi/css/ry-ui.css?v=4.1.0}" rel="stylesheet"/>
+    <link href="../../static/favicon.png" th:href="@{/static/favicon.png}" rel="shortcut icon" />
+    <link href="../../static/css/jquery.contextMenu.min.css" th:href="@{/static/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
+    <link href="../../static/css/animate.css" th:href="@{/static/css/animate.css}" rel="stylesheet"/>
+    <link href="../../static/css/skins.css" th:href="@{/static/css/skins.css}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -37,7 +39,7 @@
                         <a class="menuItem" title="个人中心" th:href="@{/system/user/profile}">
                             <div class="hide" th:text="个人中心"></div>
                             <div class="pull-left image">
-                                <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
+                                <img th:src="(${user.avatar} == '') ? @{/static/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
                             </div>
                         </a>
                         <div class="pull-left info">
@@ -186,7 +188,7 @@
                     <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-                            <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
+                            <img th:src="(${user.avatar} == '') ? @{/static/img/profile.jpg} : @{${user.avatar}}" class="user-image">
                             <span class="hidden-xs">[[${user.userName}]]</span>
                         </a>
                         <ul class="dropdown-menu">
@@ -239,18 +241,21 @@
     </div>
     <!--右侧部分结束-->
 </div>
+
 <!-- 全局js -->
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
-<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
-<script th:src="@{/js/jquery.contextMenu.min.js}"></script>
-<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script th:src="@{/ruoyi/js/ry-ui.js?v=4.1.0}"></script>
-<script th:src="@{/ruoyi/js/common.js?v=4.1.0}"></script>
-<script th:src="@{/ruoyi/index.js}"></script>
-<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script src="../../static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+<script src="../../static/ajax/libs/layer/layer.min.js" th:src="@{/static/ajax/libs/layer/layer.min.js}"></script>
+<script src="../../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/static/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+<script src="../../static/ruoyi/js/ry-ui.js" th:src="@{/static/ruoyi/js/ry-ui.js?v=4.1.0}"></script>
+
+<script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/static/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/static/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script src="../../static/js/jquery.contextMenu.min.js" th:src="@{/static/js/jquery.contextMenu.min.js}"></script>
+<script src="../../static/ruoyi/js/common.js?v=4.1.0" th:src="@{/static/ruoyi/js/common.js?v=4.1.0}"></script>
+<script src="../../static/ruoyi/index.js" th:src="@{/static/ruoyi/index.js}"></script>
+<script src="../../static/ajax/libs/fullscreen/jquery.fullscreen.js" th:src="@{/static/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+
 <script th:inline="javascript">
     var ctx = [[@{/}]];
 // 皮肤缓存
