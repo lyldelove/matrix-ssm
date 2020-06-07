@@ -36,7 +36,9 @@ public class IndexController extends BaseController {
 
     // 系统介绍
     @GetMapping("/system/main")
-    public String main() {
+    public String main(ModelMap modelMap) {
+        modelMap.put("version", "123");
+
         return "main";
     }
 }
