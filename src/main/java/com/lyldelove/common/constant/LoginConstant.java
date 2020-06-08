@@ -56,4 +56,9 @@ public interface LoginConstant {
      * 用户登录成功
      */
     String USER_LOGIN_SUCCESS = "user.login.success";
+
+    /**
+     * 用户退出成功
+     */
+    String USER_LOGOUT_SUCCESS = "user.logout.success";
 }

@@ -27,5 +27,13 @@ public interface ShiroConstant {
      */
     String CAPTCHA_ERROR = "captchaError";
 
+    /**
+     * 登录记录缓存名
+     */
     String LOGIN_RECORD_CACHE = "loginRecordCache";
+
+    /**
+     * 用户缓存
+     */
+    String SYS_USERCACHE = "sys-userCache";
 }

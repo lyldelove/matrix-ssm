@@ -11,6 +11,11 @@ import org.springframework.util.StringUtils;
 public class StringUtil extends StringUtils {
 
     /**
+     * 空字符串
+     */
+    private static final String NULLSTR = "";
+
+    /**
      * 手机号码正则表达式匹配
      */
     public static final String MOBILE_PHONE_NUMBER_PATTERN = "^0{0,1}(13[0-9]|15[0-9]|14[0-9]|18[0-9])[0-9]{8}$";
@@ -36,6 +41,24 @@ public class StringUtil extends StringUtils {
      */
     public static boolean isNotNull(Object object) {
         return !isNull(object);
+    }
+
+    /**
+     * * 判断一个字符串是否为空串
+     * @param str String
+     * @return true：为空 false：非空
+     */
+    public static boolean isEmpty(String str) {
+        return isNull(str) || NULLSTR.equals(str.trim());
+    }
+
+    /**
+     * * 判断一个字符串是否为非空串
+     * @param str String
+     * @return true：非空串 false：空串
+     */
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
     }
 
     /**

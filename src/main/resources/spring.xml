@@ -86,6 +86,7 @@
         <property name="filters">
             <map>
                 <entry key="captchaValidate" value-ref="captchaValidateFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
             </map>
         </property>
         <!--  配置权限  -->
@@ -103,6 +104,8 @@
                 <entry key="/static/ruoyi/**" value="anon"/>
                 <!--  获取验证码图片  -->
                 <entry key="/captcha/captchaImage**" value="anon"/>
+                <!--  退出 logout地址，shiro去清除session  -->
+                <entry key="/logout" value="logout"/>
                 <!--  登录  -->
                 <entry key="/login" value="anon,captchaValidate"/>
                 <!--  所有请求需要认证  -->
@@ -115,6 +118,11 @@
     <bean id="captchaValidateFilter" class="com.lyldelove.base.filter.CaptchaValidateFilter">
         <property name="captchaEnabled" value="${shiro.user.captchaEnabled}"/>
         <property name="captchaType" value="${shiro.user.captchaType}"/>
+    </bean>
+
+    <bean id="logoutFilter" class="com.lyldelove.base.filter.LogoutFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="loginUrl" value="${shiro.user.loginUrl}"/>
     </bean>
 
     <!--  国际化配置  -->
