@@ -2,6 +2,7 @@ package com.lyldelove.dao.system;
 
 import com.lyldelove.dto.system.User;
 import com.lyldelove.entity.system.SysUser;
+import com.lyldelove.entity.system.SysUserOnline;
 
 public interface SysUserMapper {
 

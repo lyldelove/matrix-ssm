@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyldelove.dao.system.SysUserOnlineMapper">
+
+  <resultMap id="BaseResultMap" type="com.lyldelove.entity.system.SysUserOnline">
+    <id column="session_id" property="sessionId" />
+    <result column="login_name" property="loginName" />
+    <result column="dept_name" property="deptName" />
+    <result column="ip_addr" property="ipAddr" />
+    <result column="login_location" property="loginLocation" />
+    <result column="browser" property="browser" />
+    <result column="os" property="os" />
+    <result column="status" property="status" />
+    <result column="start_timestamp" property="startTimestamp" />
+    <result column="last_access_time" property="lastAccessTime" />
+    <result column="expire_time" property="expireTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    session_id, login_name, dept_name, ip_addr, login_location, browser, os, `status`, 
+    start_timestamp, last_access_time, expire_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_online
+    where session_id = #{sessionId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user_online
+    where session_id = #{sessionId}
+  </delete>
+
+  <insert id="insert" keyColumn="session_id" keyProperty="sessionId" parameterType="com.lyldelove.entity.system.SysUserOnline" useGeneratedKeys="true">
+    insert into sys_user_online (login_name, dept_name, ip_addr, 
+      login_location, browser, os, 
+      `status`, start_timestamp, last_access_time, 
+      expire_time)
+    values (#{loginName}, #{deptName}, #{ipAddr}, 
+      #{loginLocation}, #{browser}, #{os}, 
+      #{status}, #{startTimestamp}, #{lastAccessTime}, 
+      #{expireTime})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.lyldelove.entity.system.SysUserOnline">
+    update sys_user_online
+    set login_name = #{loginName},
+      dept_name = #{deptName},
+      ip_addr = #{ipAddr},
+      login_location = #{loginLocation},
+      browser = #{browser},
+      os = #{os},
+      `status` = #{status},
+      start_timestamp = #{startTimestamp},
+      last_access_time = #{lastAccessTime},
+      expire_time = #{expireTime}
+    where session_id = #{sessionId}
+  </update>
+</mapper>

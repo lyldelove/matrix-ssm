@@ -120,10 +120,13 @@
         <property name="captchaType" value="${shiro.user.captchaType}"/>
     </bean>
 
+    <!--  登出系统过滤器  -->
     <bean id="logoutFilter" class="com.lyldelove.base.filter.LogoutFilter">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="loginUrl" value="${shiro.user.loginUrl}"/>
     </bean>
+
+<!--    <bean id="" class=""></bean>-->
 
     <!--  国际化配置  -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

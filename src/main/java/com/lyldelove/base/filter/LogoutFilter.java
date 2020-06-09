@@ -14,6 +14,7 @@ import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -32,6 +33,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
     /**
      * 退出后重定向的地址
      */
+    @Value("${shiro.user.loginUrl}")
     private String loginUrl;
 
     private Cache<String, Deque<Serializable>> cache;

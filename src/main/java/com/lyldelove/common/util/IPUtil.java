@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 import static sun.net.util.IPAddressUtil.textToNumericFormatV4;
@@ -20,6 +21,36 @@ public class IPUtil {
     private static final Logger log = LoggerFactory.getLogger(IPUtil.class);
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
+
+    public static String getIpAddr(HttpServletRequest request) {
+        if (StringUtil.isNull(request)) {
+            return "unknown";
+        }
+
+        String ip = request.getHeader("x-forwarded-for");
+
+        if (StringUtil.isNull(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+
+        if (StringUtil.isNull(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Forwarded-For");
+        }
+
+        if (StringUtil.isNull(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+
+        if (StringUtil.isNull(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
+        }
+
+        if (StringUtil.isNull(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+    }
 
     /**
      * 工具IP获取实际的地址
