@@ -7,8 +7,11 @@ import com.lyldelove.common.util.IPUtil;
 import com.lyldelove.common.util.ServletUtil;
 import com.lyldelove.common.util.ShiroUtil;
 import com.lyldelove.common.util.StringUtil;
+import com.lyldelove.dto.system.OnlineSession;
 import com.lyldelove.entity.system.SysLoginLog;
+import com.lyldelove.entity.system.SysUserOnline;
 import com.lyldelove.service.intf.system.LoginLogService;
+import com.lyldelove.service.intf.system.OnlineService;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +64,29 @@ public class AsyncFactory {
                 loginLog.setLoginTime(LocalDateTime.now());
                 //存入数据库
                 SpringContext.getBean(LoginLogService.class).saveLoginLog(loginLog);
+            }
+        };
+    }
+
+    public static TimerTask syncSessionToDb(OnlineSession onlineSession) {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                SysUserOnline online =new SysUserOnline();
+
+                online.setSessionId(onlineSession.getId() + "");
+                online.setDeptName(onlineSession.getDeptName());
+                online.setLoginName(onlineSession.getLoginName());
+                online.setStartTimestamp(onlineSession.getStartTimestamp());
+                online.setLastAccessTime(onlineSession.getLastAccessTime());
+                online.setExpireTime(onlineSession.getTimeout());
+                online.setIpAddr(onlineSession.getHost());
+                online.setLoginLocation(IPUtil.getRealAddressByIP(onlineSession.getHost()));
+                online.setBrowser(onlineSession.getBrowser());
+                online.setOs(onlineSession.getOs());
+                online.setStatus(onlineSession.getStatus());
+                online.setSession(onlineSession);
+                SpringContext.getBean(OnlineService.class).saveOnline(online);
             }
         };
     }

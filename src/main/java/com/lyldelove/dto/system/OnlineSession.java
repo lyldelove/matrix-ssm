@@ -112,6 +112,14 @@ public class OnlineSession extends SimpleSession {
         this.attributeChanged = attributeChanged;
     }
 
+    public void markAttributeChanged() {
+        this.attributeChanged = true;
+    }
+
+    public void resetAttributeChanged() {
+        this.attributeChanged = false;
+    }
+
     @Override
     public void setAttribute(Object key, Object value) {
         super.setAttribute(key, value);

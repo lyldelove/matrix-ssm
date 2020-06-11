@@ -2,6 +2,7 @@ package com.lyldelove.entity.system;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.lyldelove.dto.system.OnlineSession;
 import lombok.Data;
@@ -50,22 +51,22 @@ public class SysUserOnline implements Serializable {
     /**
      * 状态
      */
-    private String status;
+    private OnlineSession.OnlineStatus status = OnlineSession.OnlineStatus.on_line;
 
     /**
      * session创建时间
      */
-    private LocalDateTime startTimestamp;
+    private Date startTimestamp;
 
     /**
      * session最后访问时间
      */
-    private LocalDateTime lastAccessTime;
+    private Date lastAccessTime;
 
     /**
      * 超时时间，单位为分钟
      */
-    private Integer expireTime;
+    private Long expireTime;
 
     /** 备份的当前用户会话 */
     private OnlineSession session;

@@ -7,4 +7,6 @@ public interface OnlineService {
     SysUserOnline selectOnlineById(String sessionId);
 
     void deleteOnlineById(String sessionId);
+
+    void saveOnline(SysUserOnline online);
 }

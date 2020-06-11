@@ -27,4 +27,9 @@ public class OnlineServiceImpl implements OnlineService {
     public void deleteOnlineById(String sessionId) {
         sysUserOnlineMapper.deleteByPrimaryKey(sessionId);
     }
+
+    @Override
+    public void saveOnline(SysUserOnline online) {
+        sysUserOnlineMapper.insert(online);
+    }
 }

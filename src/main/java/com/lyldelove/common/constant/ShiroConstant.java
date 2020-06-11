@@ -36,4 +36,9 @@ public interface ShiroConstant {
      * 用户缓存
      */
     String SYS_USERCACHE = "sys-userCache";
+
+    /**
+     * 当前在线会话
+     */
+    String ONLINE_SESSION = "online_session";
 }

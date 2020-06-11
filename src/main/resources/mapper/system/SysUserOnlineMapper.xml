@@ -33,12 +33,12 @@
     where session_id = #{sessionId}
   </delete>
 
-  <insert id="insert" keyColumn="session_id" keyProperty="sessionId" parameterType="com.lyldelove.entity.system.SysUserOnline" useGeneratedKeys="true">
-    insert into sys_user_online (login_name, dept_name, ip_addr, 
+  <insert id="insert">
+    replace into sys_user_online (session_id, login_name, dept_name, ip_addr,
       login_location, browser, os, 
       `status`, start_timestamp, last_access_time, 
       expire_time)
-    values (#{loginName}, #{deptName}, #{ipAddr}, 
+    values (#{sessionId}, #{loginName}, #{deptName}, #{ipAddr},
       #{loginLocation}, #{browser}, #{os}, 
       #{status}, #{startTimestamp}, #{lastAccessTime}, 
       #{expireTime})

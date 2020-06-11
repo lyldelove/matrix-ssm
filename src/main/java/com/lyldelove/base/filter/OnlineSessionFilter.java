@@ -1,11 +1,18 @@
 package com.lyldelove.base.filter;
 
 import com.lyldelove.base.shiro.OnlineSessionDAO;
+import com.lyldelove.common.constant.ShiroConstant;
+import com.lyldelove.common.util.ShiroUtil;
 import com.lyldelove.common.util.StringUtil;
+import com.lyldelove.dto.system.OnlineSession;
+import com.lyldelove.entity.system.SysUser;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
@@ -26,6 +33,7 @@ public class OnlineSessionFilter extends AccessControlFilter {
     /**
      *
      */
+    @Resource
     private OnlineSessionDAO onlineSessionDAO;
 
     /**
@@ -43,6 +51,31 @@ public class OnlineSessionFilter extends AccessControlFilter {
         if (StringUtil.isNull(subject) || StringUtil.isNull(subject.getSession())) {
             return true;
         }
+
+        Session session = onlineSessionDAO.readSession(subject.getSession().getId());
+
+        if (session instanceof OnlineSession){
+            OnlineSession onlineSession = (OnlineSession) session;
+            request.setAttribute(ShiroConstant.ONLINE_SESSION, onlineSession);
+            // 把user对象设置进去
+            boolean isGuest = onlineSession.getUserId() == null || onlineSession.getUserId() == 0L;
+
+            if (isGuest == true) {
+                SysUser user = ShiroUtil.getSysUser();
+                if (user != null)
+                {
+                    onlineSession.setUserId(user.getUserId());
+                    onlineSession.setLoginName(user.getLoginName());
+                    onlineSession.setAvatar(user.getAvatar());
+                    onlineSession.setDeptName("");
+                    onlineSession.markAttributeChanged();
+                }
+            }
+
+            if (onlineSession.getStatus() == OnlineSession.OnlineStatus.off_line) {
+                return false;
+            }
+        }
         return false;
     }
 
@@ -55,11 +88,19 @@ public class OnlineSessionFilter extends AccessControlFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        Subject subject = getSubject(request, response);
+
+        if (StringUtil.isNotNull(subject)) {
+            subject.logout();
+        }
+
+        saveRequestAndRedirectToLogin(request, response);
+
         return false;
     }
 
     @Override
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
-        super.redirectToLogin(request, response);
+        WebUtils.issueRedirect(request, response, loginUrl);
     }
 }
