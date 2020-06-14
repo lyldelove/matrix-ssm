@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @title OnlineSessionFactory
  * @date 2020/6/10 7:14
  */
-@Component
+
 public class OnlineSessionFactory implements SessionFactory {
 
     @Override

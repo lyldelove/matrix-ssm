@@ -21,7 +21,7 @@ import java.util.Date;
  * @title OnlineSessionDAO
  * @date 2020/6/10 6:41
  */
-@Component
+
 public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {
 
     /**

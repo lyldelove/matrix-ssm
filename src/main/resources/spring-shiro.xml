@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--  注册Shiro Relam  -->
+    <bean id="userRelam" class="com.lyldelove.base.shiro.UserRealm">
+    </bean>
+
+    <!--  缓存管理器, 这里用ehcache插件(已被shiro集成)  -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
+    </bean>
+
+    <!--手动指定cookie-->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="domain" value="${shiro.cookie.domain}"/>
+        <property name="path" value="${shiro.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.cookie.maxAge}"/><!-- 7天 -->
+    </bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!--注入自定义cookie(主要是设置寿命, 默认的一年太长)-->
+        <property name="cookie" ref="rememberMeCookie"/>
+        <!--  cipherKey是加密rememberMe Cookie的密钥；默认AES算法  -->
+        <!--  <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('haskjagsjazhjfdsajasdkjsa==')}"/>  -->
+    </bean>
+
+    <!--  自定义sessionDAO会话  -->
+    <bean id="sessionDao" class="com.lyldelove.base.shiro.OnlineSessionDAO"/>
+
+    <!--  自定义sessionFactory会话  -->
+    <bean id="sessionFactory" class="com.lyldelove.base.shiro.OnlineSessionFactory"/>
+
+    <!--  Session中Cookie的名称  -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="${shiro.session.cookie}"/>
+    </bean>
+
+    <!-- 会话验证调度器 -->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="interval" value="${shiro.session.interval}"/>
+    </bean>
+
+    <!--  会话管理器  -->
+    <bean id="sessionManager" class="com.lyldelove.base.shiro.OnlineWebSessionManager">
+        <!--  缓存管理器  -->
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--  删除过期的session  -->
+        <property name="deleteInvalidSessions" value="true"/>
+        <!--  设置全局session超时时间  -->
+        <property name="globalSessionTimeout" value="${shiro.session.expireTime}"/>
+        <!--  去掉 JSESSIONID  -->
+        <property name="sessionIdUrlRewritingEnabled" value="false"/>
+        <!--  定义要使用的无效的Session定时调度器  -->
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <!--  是否定时检查session  -->
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <!--  自定义SessionDao  -->
+        <property name="sessionDAO" ref="sessionDao"/>
+        <!--  自定义sessionFactory  -->
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <!--  自定义cookie名称  -->
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+    </bean>
+
+    <!--  配置Shiro SecurityManager  -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRelam"/>
+        <!--注入缓存管理器-->
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--注入rememberMe cookie管理器-->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <!--Session管理器-->
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!--  配置Shiro Filter, id与web.xml中配置的过滤器名字一致  -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--  设置登录url，认证失败后跳转  -->
+        <property name="loginUrl" value="${shiro.user.loginUrl}"/>
+        <!--  配置过滤器  -->
+        <property name="filters">
+            <map>
+                <entry key="captchaValidate" value-ref="captchaValidateFilter"/>
+                <entry key="onlineSession" value-ref="onlineSessionFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
+            </map>
+        </property>
+        <!--  配置权限  -->
+        <property name="filterChainDefinitionMap">
+            <map>
+                <!--  静态资源  -->
+                <entry key="/static/favicon.png**" value="anon"/>
+                <entry key="/static/matrix.png**" value="anon"/>
+                <entry key="/static/css/**" value="anon"/>
+                <entry key="/static/docs/**" value="anon"/>
+                <entry key="/static/fonts/**" value="anon"/>
+                <entry key="/static/img/**" value="anon"/>
+                <entry key="/static/ajax/**" value="anon"/>
+                <entry key="/static/js/**" value="anon"/>
+                <entry key="/static/ruoyi/**" value="anon"/>
+                <!--  获取验证码图片  -->
+                <entry key="/captcha/captchaImage**" value="anon"/>
+                <!--  退出 logout地址，shiro去清除session  -->
+                <entry key="/logout" value="logout"/>
+                <!--  登录  -->
+                <entry key="/login" value="anon,captchaValidate"/>
+                <!--  所有请求需要认证  -->
+                <entry key="/**" value="user,onlineSession"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--  验证码校验过滤器  -->
+    <bean id="captchaValidateFilter" class="com.lyldelove.base.filter.CaptchaValidateFilter">
+        <property name="captchaEnabled" value="${shiro.user.captchaEnabled}"/>
+        <property name="captchaType" value="${shiro.user.captchaType}"/>
+    </bean>
+
+    <!--  登出系统过滤器  -->
+    <bean id="logoutFilter" class="com.lyldelove.base.filter.LogoutFilter">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="loginUrl" value="${shiro.user.loginUrl}"/>
+    </bean>
+
+    <bean id="onlineSessionFilter" class="com.lyldelove.base.filter.OnlineSessionFilter">
+        <property name="loginUrl" value="${shiro.user.loginUrl}"/>
+    </bean>
+
+</beans>
